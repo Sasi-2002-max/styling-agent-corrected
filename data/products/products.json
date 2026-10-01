@@ -1,0 +1,1812 @@
+[
+  {
+    "product_id": "MOCK001",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "Black Oxford Shirt",
+    "category": "shirts",
+    "color": "black",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock001.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK001",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK002",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "White Formal Shirt",
+    "category": "shirts",
+    "color": "white",
+    "price": 1499,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock002.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK002",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK003",
+    "store": "Demo Style",
+    "brand": "Casely",
+    "title": "Navy Casual Shirt",
+    "category": "shirts",
+    "color": "navy",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": null,
+    "product_url": "https://www.demostyle.test/product/MOCK003",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK004",
+    "store": "Demo Trends",
+    "brand": "Checkmate",
+    "title": "Maroon Checked Shirt",
+    "category": "shirts",
+    "color": "maroon",
+    "price": 1799,
+    "currency": "INR",
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock004.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK004",
+    "availability": false
+  },
+  {
+    "product_id": "MOCK005",
+    "store": "Demo Fashion",
+    "brand": "BasicCo",
+    "title": "White Crew Neck Tee",
+    "category": "t-shirts",
+    "color": "white",
+    "price": 499,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock005.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK005",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK006",
+    "store": "Demo Style",
+    "brand": "InkPrint",
+    "title": "Black Graphic Tee",
+    "category": "t-shirts",
+    "color": "black",
+    "price": 599,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock006.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK006",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK007",
+    "store": "Demo Trends",
+    "brand": "BasicCo",
+    "title": "Grey Melange Tee",
+    "category": "t-shirts",
+    "color": "grey",
+    "price": 449,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock007.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK007",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK008",
+    "store": "Demo Fashion",
+    "brand": "Loosefit",
+    "title": "Olive Oversized Tee",
+    "category": "t-shirts",
+    "color": "olive",
+    "price": 699,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock008.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK008",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK009",
+    "store": "Demo Style",
+    "brand": "Aria",
+    "title": "Cream Blouse",
+    "category": "tops",
+    "color": "cream",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock009.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK009",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK010",
+    "store": "Demo Fashion",
+    "brand": "Aria",
+    "title": "Beige Wrap Top",
+    "category": "tops",
+    "color": "beige",
+    "price": 1099,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock010.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK010",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK011",
+    "store": "Demo Trends",
+    "brand": "Bloom",
+    "title": "Pink Ruffle Top",
+    "category": "tops",
+    "color": "pink",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock011.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK011",
+    "availability": false
+  },
+  {
+    "product_id": "MOCK012",
+    "store": "Demo Fashion",
+    "brand": "Tailorline",
+    "title": "Cream Straight Trousers",
+    "category": "pants",
+    "color": "cream",
+    "price": 1699,
+    "currency": "INR",
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock012.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK012",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK013",
+    "store": "Demo Style",
+    "brand": "Tailorline",
+    "title": "Black Formal Trousers",
+    "category": "pants",
+    "color": "black",
+    "price": 1599,
+    "currency": "INR",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock013.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK013",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK014",
+    "store": "Demo Trends",
+    "brand": "Chino Co",
+    "title": "Beige Chinos",
+    "category": "pants",
+    "color": "beige",
+    "price": 1399,
+    "currency": "INR",
+    "sizes": [
+      "30",
+      "32",
+      "34"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock014.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK014",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK015",
+    "store": "Demo Fashion",
+    "brand": "WideStep",
+    "title": "Grey Wide Leg Pants",
+    "category": "pants",
+    "color": "grey",
+    "price": 1899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": null,
+    "product_url": "https://www.mockfashionstore.test/product/MOCK015",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK016",
+    "store": "Demo Style",
+    "brand": "DenimHouse",
+    "title": "Blue Slim Fit Jeans",
+    "category": "jeans",
+    "color": "blue",
+    "price": 1999,
+    "currency": "INR",
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock016.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK016",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK017",
+    "store": "Demo Fashion",
+    "brand": "DenimHouse",
+    "title": "Black Skinny Jeans",
+    "category": "jeans",
+    "color": "black",
+    "price": 2199,
+    "currency": "INR",
+    "sizes": [
+      "28",
+      "30",
+      "32"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock017.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK017",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK018",
+    "store": "Demo Trends",
+    "brand": "MomFit",
+    "title": "Light Blue Mom Jeans",
+    "category": "jeans",
+    "color": "blue",
+    "price": 1899,
+    "currency": "INR",
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock018.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK018",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK019",
+    "store": "Demo Style",
+    "brand": "Aline Studio",
+    "title": "Black A-Line Skirt",
+    "category": "skirts",
+    "color": "black",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock019.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK019",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK020",
+    "store": "Demo Fashion",
+    "brand": "Pleatworks",
+    "title": "Maroon Pleated Skirt",
+    "category": "skirts",
+    "color": "maroon",
+    "price": 1499,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock020.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK020",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK021",
+    "store": "Demo Trends",
+    "brand": "Midiline",
+    "title": "Teal Midi Skirt",
+    "category": "skirts",
+    "color": "teal",
+    "price": 1699,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock021.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK021",
+    "availability": false
+  },
+  {
+    "product_id": "MOCK022",
+    "store": "Demo Fashion",
+    "brand": "Aria",
+    "title": "Teal Fit & Flare Midi Dress",
+    "category": "dresses",
+    "color": "teal",
+    "price": 2499,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock022.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK022",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK023",
+    "store": "Demo Style",
+    "brand": "Heritage Weave",
+    "title": "Maroon Embroidered Wedding Dress",
+    "category": "dresses",
+    "color": "maroon",
+    "price": 4599,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock023.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK023",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK024",
+    "store": "Demo Trends",
+    "brand": "Glamora",
+    "title": "Gold Sequin Evening Dress",
+    "category": "dresses",
+    "color": "gold",
+    "price": 6999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock024.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK024",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK025",
+    "store": "Demo Fashion",
+    "brand": "Heritage Weave",
+    "title": "Cream Lace A-Line Dress",
+    "category": "dresses",
+    "color": "cream",
+    "price": 3899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock025.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK025",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK026",
+    "store": "Demo Style",
+    "brand": "Aria",
+    "title": "Navy Wrap Dress",
+    "category": "dresses",
+    "color": "navy",
+    "price": 2199,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "image_url": null,
+    "product_url": "https://www.demostyle.test/product/MOCK026",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK027",
+    "store": "Demo Fashion",
+    "brand": "Stridewell",
+    "title": "Brown Leather Loafers",
+    "category": "shoes",
+    "color": "brown",
+    "price": 1899,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock027.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK027",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK028",
+    "store": "Demo Style",
+    "brand": "Stridewell",
+    "title": "Black Formal Derby Shoes",
+    "category": "shoes",
+    "color": "black",
+    "price": 2199,
+    "currency": "INR",
+    "sizes": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock028.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK028",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK029",
+    "store": "Demo Trends",
+    "brand": "Heelworks",
+    "title": "Silver Block Heels",
+    "category": "shoes",
+    "color": "silver",
+    "price": 2499,
+    "currency": "INR",
+    "sizes": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock029.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK029",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK030",
+    "store": "Demo Fashion",
+    "brand": "SoleMate",
+    "title": "Nude Strappy Sandals",
+    "category": "shoes",
+    "color": "beige",
+    "price": 1799,
+    "currency": "INR",
+    "sizes": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock030.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK030",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK031",
+    "store": "Demo Style",
+    "brand": "Stridewell",
+    "title": "White Sneakers",
+    "category": "shoes",
+    "color": "white",
+    "price": 2999,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock031.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK031",
+    "availability": false
+  },
+  {
+    "product_id": "MOCK032",
+    "store": "Demo Fashion",
+    "brand": "Timekeep",
+    "title": "Silver Analog Watch",
+    "category": "watches",
+    "color": "silver",
+    "price": 1999,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock032.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK032",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK033",
+    "store": "Demo Style",
+    "brand": "Timekeep",
+    "title": "Gold Chain Watch",
+    "category": "watches",
+    "color": "gold",
+    "price": 3499,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock033.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK033",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK034",
+    "store": "Demo Trends",
+    "brand": "Chronoline",
+    "title": "Black Leather Strap Watch",
+    "category": "watches",
+    "color": "black",
+    "price": 1599,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock034.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK034",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK035",
+    "store": "Demo Fashion",
+    "brand": "Shadeworks",
+    "title": "Black Aviator Sunglasses",
+    "category": "sunglasses",
+    "color": "black",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock035.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK035",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK036",
+    "store": "Demo Style",
+    "brand": "Shadeworks",
+    "title": "Brown Cateye Sunglasses",
+    "category": "sunglasses",
+    "color": "brown",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock036.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK036",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK037",
+    "store": "Demo Trends",
+    "brand": "Glarefree",
+    "title": "Gold Round Sunglasses",
+    "category": "sunglasses",
+    "color": "gold",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": null,
+    "product_url": "https://www.demotrends.test/product/MOCK037",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK038",
+    "store": "Demo Fashion",
+    "brand": "Carryall",
+    "title": "Beige Sling Bag",
+    "category": "bags",
+    "color": "beige",
+    "price": 1499,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock038.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK038",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK039",
+    "store": "Demo Style",
+    "brand": "Clutchline",
+    "title": "Black Clutch",
+    "category": "bags",
+    "color": "black",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock039.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK039",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK040",
+    "store": "Demo Trends",
+    "brand": "Carryall",
+    "title": "Brown Tote Bag",
+    "category": "bags",
+    "color": "brown",
+    "price": 1999,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock040.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK040",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK041",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Silver Layered Necklace",
+    "category": "accessories",
+    "color": "silver",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock041.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK041",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK042",
+    "store": "Demo Style",
+    "brand": "Glimmer",
+    "title": "Gold Hoop Earrings",
+    "category": "accessories",
+    "color": "gold",
+    "price": 599,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demostyle.test/images/mock042.jpg",
+    "product_url": "https://www.demostyle.test/product/MOCK042",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK043",
+    "store": "Demo Trends",
+    "brand": "Pearlton",
+    "title": "Pearl Hair Clip Set",
+    "category": "accessories",
+    "color": "white",
+    "price": 399,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.demotrends.test/images/mock043.jpg",
+    "product_url": "https://www.demotrends.test/product/MOCK043",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK044",
+    "store": "Demo Fashion",
+    "brand": "StyleAura",
+    "title": "Emerald Green Embroidered Kurti",
+    "category": "tops",
+    "color": "emerald green",
+    "price": 1399,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock044.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK044",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK045",
+    "store": "Demo Style",
+    "brand": "StyleAura",
+    "title": "Bottle Green Straight Kurti",
+    "category": "tops",
+    "color": "green",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock045.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK045",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK046",
+    "store": "Demo Trends",
+    "brand": "Ethnic Loom",
+    "title": "Royal Blue Silk Blend Kurti",
+    "category": "tops",
+    "color": "royal blue",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock046.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK046",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK047",
+    "store": "Demo Fashion",
+    "brand": "Ethnic Loom",
+    "title": "Maroon Embroidered Kurti",
+    "category": "tops",
+    "color": "maroon",
+    "price": 1349,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock047.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK047",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK048",
+    "store": "Demo Style",
+    "brand": "StyleAura",
+    "title": "Black Cotton Kurti",
+    "category": "tops",
+    "color": "black",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock048.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK048",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK049",
+    "store": "Demo Trends",
+    "brand": "Ethnic Loom",
+    "title": "Cream Chikankari Kurti",
+    "category": "tops",
+    "color": "cream",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock049.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK049",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK050",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "White Cotton Casual Top",
+    "category": "tops",
+    "color": "white",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock050.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK050",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK051",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Black Ribbed Fitted Top",
+    "category": "tops",
+    "color": "black",
+    "price": 699,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock051.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK051",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK052",
+    "store": "Demo Trends",
+    "brand": "Glimmer",
+    "title": "Blush Pink Peplum Top",
+    "category": "tops",
+    "color": "pink",
+    "price": 1099,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock052.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK052",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK053",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Navy Satin Blouse",
+    "category": "tops",
+    "color": "navy",
+    "price": 1149,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock053.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK053",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK054",
+    "store": "Demo Fashion",
+    "brand": "StyleAura",
+    "title": "Soft Gold Crepe Palazzo Pants",
+    "category": "pants",
+    "color": "gold",
+    "price": 1099,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock054.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK054",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK055",
+    "store": "Demo Style",
+    "brand": "StyleAura",
+    "title": "Cream High-Waist Palazzo Pants",
+    "category": "pants",
+    "color": "cream",
+    "price": 1049,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock055.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK055",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK056",
+    "store": "Demo Trends",
+    "brand": "Urban Weave",
+    "title": "Black Straight-Fit Trousers",
+    "category": "pants",
+    "color": "black",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock056.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK056",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK057",
+    "store": "Demo Fashion",
+    "brand": "Ethnic Loom",
+    "title": "Beige Wide-Leg Palazzo Pants",
+    "category": "pants",
+    "color": "beige",
+    "price": 949,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock057.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK057",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK058",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Navy Tailored Trousers",
+    "category": "pants",
+    "color": "navy",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock058.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK058",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK059",
+    "store": "Demo Trends",
+    "brand": "Ethnic Loom",
+    "title": "Maroon Flared Palazzo Pants",
+    "category": "pants",
+    "color": "maroon",
+    "price": 1099,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock059.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK059",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK060",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "White Linen Pants",
+    "category": "pants",
+    "color": "white",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock060.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK060",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK061",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Black Slim Cigarette Trousers",
+    "category": "pants",
+    "color": "black",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock061.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK061",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK062",
+    "store": "Demo Trends",
+    "brand": "Urban Weave",
+    "title": "Grey Formal Trousers",
+    "category": "pants",
+    "color": "grey",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock062.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK062",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK063",
+    "store": "Demo Fashion",
+    "brand": "Denim Co",
+    "title": "Black Straight Jeans",
+    "category": "jeans",
+    "color": "black",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock063.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK063",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK064",
+    "store": "Demo Style",
+    "brand": "Denim Co",
+    "title": "Mid Blue Straight Jeans",
+    "category": "jeans",
+    "color": "blue",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock064.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK064",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK065",
+    "store": "Demo Trends",
+    "brand": "Glimmer",
+    "title": "Cream Satin Midi Skirt",
+    "category": "skirts",
+    "color": "cream",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock065.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK065",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK066",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Emerald Green Satin Midi Dress",
+    "category": "dresses",
+    "color": "emerald green",
+    "price": 2799,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock066.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK066",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK067",
+    "store": "Demo Style",
+    "brand": "Glimmer",
+    "title": "Black Bodycon Midi Dress",
+    "category": "dresses",
+    "color": "black",
+    "price": 1899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock067.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK067",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK068",
+    "store": "Demo Trends",
+    "brand": "Glimmer",
+    "title": "Dusty Pink Floral Midi Dress",
+    "category": "dresses",
+    "color": "pink",
+    "price": 1799,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock068.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK068",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK069",
+    "store": "Demo Fashion",
+    "brand": "StepUp",
+    "title": "Gold Block Heel Sandals",
+    "category": "shoes",
+    "color": "gold",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock069.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK069",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK070",
+    "store": "Demo Style",
+    "brand": "StepUp",
+    "title": "Nude Block Heel Sandals",
+    "category": "shoes",
+    "color": "nude",
+    "price": 849,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock070.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK070",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK071",
+    "store": "Demo Trends",
+    "brand": "StepUp",
+    "title": "Black Block Heel Pumps",
+    "category": "shoes",
+    "color": "black",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock071.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK071",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK072",
+    "store": "Demo Fashion",
+    "brand": "StepUp",
+    "title": "Tan Brown Leather Loafers",
+    "category": "shoes",
+    "color": "brown",
+    "price": 1099,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock072.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK072",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK073",
+    "store": "Demo Style",
+    "brand": "StepUp",
+    "title": "White Canvas Sneakers",
+    "category": "shoes",
+    "color": "white",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock073.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK073",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK074",
+    "store": "Demo Trends",
+    "brand": "StepUp",
+    "title": "Black Casual Sneakers",
+    "category": "shoes",
+    "color": "black",
+    "price": 949,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock074.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK074",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK075",
+    "store": "Demo Fashion",
+    "brand": "StepUp",
+    "title": "Silver Flat Sandals",
+    "category": "shoes",
+    "color": "silver",
+    "price": 949,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock075.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK075",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK076",
+    "store": "Demo Style",
+    "brand": "Ethnic Loom",
+    "title": "Gold Embellished Juttis",
+    "category": "shoes",
+    "color": "gold",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock076.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK076",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK077",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Burgundy Metallic Clutch",
+    "category": "bags",
+    "color": "burgundy",
+    "price": 699,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock077.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK077",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK078",
+    "store": "Demo Style",
+    "brand": "Glimmer",
+    "title": "Gold Sequin Clutch",
+    "category": "bags",
+    "color": "gold",
+    "price": 649,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock078.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK078",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK079",
+    "store": "Demo Trends",
+    "brand": "Urban Weave",
+    "title": "Black Mini Sling Bag",
+    "category": "bags",
+    "color": "black",
+    "price": 599,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock079.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK079",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK080",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Silver Evening Clutch",
+    "category": "bags",
+    "color": "silver",
+    "price": 679,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock080.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK080",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK081",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Brown Faux Leather Tote",
+    "category": "bags",
+    "color": "brown",
+    "price": 1199,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock081.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK081",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK082",
+    "store": "Demo Trends",
+    "brand": "Urban Weave",
+    "title": "Beige Structured Handbag",
+    "category": "bags",
+    "color": "beige",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock082.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK082",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK083",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Gold Jhumka Earrings",
+    "category": "accessories",
+    "color": "gold",
+    "price": 499,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock083.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK083",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK084",
+    "store": "Demo Style",
+    "brand": "Glimmer",
+    "title": "Gold Chandbali Earrings",
+    "category": "accessories",
+    "color": "gold",
+    "price": 449,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock084.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK084",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK085",
+    "store": "Demo Trends",
+    "brand": "Glimmer",
+    "title": "Silver Oxidised Jhumka Earrings",
+    "category": "accessories",
+    "color": "silver",
+    "price": 399,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock085.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK085",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK086",
+    "store": "Demo Fashion",
+    "brand": "Glimmer",
+    "title": "Gold Pendant Necklace",
+    "category": "accessories",
+    "color": "gold",
+    "price": 549,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock086.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK086",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK087",
+    "store": "Demo Style",
+    "brand": "Pearlton",
+    "title": "Pearl Drop Earrings",
+    "category": "accessories",
+    "color": "white",
+    "price": 349,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock087.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK087",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK088",
+    "store": "Demo Trends",
+    "brand": "Glimmer",
+    "title": "Gold Bangle Set",
+    "category": "accessories",
+    "color": "gold",
+    "price": 399,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock088.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK088",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK089",
+    "store": "Demo Fashion",
+    "brand": "Tempo",
+    "title": "Black Minimal Analog Watch",
+    "category": "watches",
+    "color": "black",
+    "price": 1299,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock089.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK089",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK090",
+    "store": "Demo Style",
+    "brand": "Tempo",
+    "title": "Rose Gold Dial Watch",
+    "category": "watches",
+    "color": "gold",
+    "price": 1499,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock090.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK090",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK091",
+    "store": "Demo Trends",
+    "brand": "Tempo",
+    "title": "Silver Mesh Strap Watch",
+    "category": "watches",
+    "color": "silver",
+    "price": 1399,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock091.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK091",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK092",
+    "store": "Demo Fashion",
+    "brand": "Shade Co",
+    "title": "Black Wayfarer Sunglasses",
+    "category": "sunglasses",
+    "color": "black",
+    "price": 599,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock092.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK092",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK093",
+    "store": "Demo Style",
+    "brand": "Shade Co",
+    "title": "Tortoise Brown Round Sunglasses",
+    "category": "sunglasses",
+    "color": "brown",
+    "price": 649,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock093.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK093",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK094",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "White Cotton Shirt",
+    "category": "shirts",
+    "color": "white",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock094.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK094",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK095",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Black Casual Cotton Shirt",
+    "category": "shirts",
+    "color": "black",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock095.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK095",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK096",
+    "store": "Demo Trends",
+    "brand": "Urban Weave",
+    "title": "Light Blue Oxford Shirt",
+    "category": "shirts",
+    "color": "blue",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock096.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK096",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK097",
+    "store": "Demo Fashion",
+    "brand": "Urban Weave",
+    "title": "Black Plain Tee",
+    "category": "t-shirts",
+    "color": "black",
+    "price": 449,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock097.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK097",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK098",
+    "store": "Demo Style",
+    "brand": "Urban Weave",
+    "title": "Navy Crew Neck Tee",
+    "category": "t-shirts",
+    "color": "navy",
+    "price": 499,
+    "currency": "INR",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock098.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK098",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK099",
+    "store": "Demo Trends",
+    "brand": "Tempo",
+    "title": "Silver Slim Analog Watch",
+    "category": "watches",
+    "color": "silver",
+    "price": 899,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock099.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK099",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK100",
+    "store": "Demo Fashion",
+    "brand": "Tempo",
+    "title": "Black Casual Digital Watch",
+    "category": "watches",
+    "color": "black",
+    "price": 799,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock100.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK100",
+    "availability": true
+  },
+  {
+    "product_id": "MOCK101",
+    "store": "Demo Style",
+    "brand": "Tempo",
+    "title": "Gold Tone Classic Watch",
+    "category": "watches",
+    "color": "gold",
+    "price": 999,
+    "currency": "INR",
+    "sizes": [
+      "One Size"
+    ],
+    "image_url": "https://cdn.mockfashionstore.test/images/mock101.jpg",
+    "product_url": "https://www.mockfashionstore.test/product/MOCK101",
+    "availability": true
+  }
+]
