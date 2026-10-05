@@ -1,19 +1,27 @@
 from typing import Any, Dict, Optional
+
 import logging
 
 from fastapi import FastAPI, HTTPException
+
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel, Field
+
 from sqlalchemy import text
 
 from backend.agents.orchestrator import (
     build_final_response,
     run_orchestrator_async,
 )
+
 from backend.database.connection import (
     DatabaseConfigurationError,
     get_engine,
 )
+
 from backend.utils.llm import LLMConfigurationError
+
 from backend.fitting_room.schemas import (
     AlternativesRequest,
     AlternativesResponse,
@@ -22,6 +30,7 @@ from backend.fitting_room.schemas import (
     FittingRoomRequest,
     FittingRoomResponse,
 )
+
 from backend.fitting_room.service import (
     FittingRoomService,
     InvalidCategoryError,
@@ -29,9 +38,54 @@ from backend.fitting_room.service import (
     InvalidMannequinGenderError,
 )
 
+# ---------------------------------------------------------------------------
+# Part 57 - Profile & Product Router
+# ---------------------------------------------------------------------------
+
+from backend.api.profile_product_router import (
+    router as profile_product_router,
+)
+
+# ---------------------------------------------------------------------------
+# Wardrobe Router
+# ---------------------------------------------------------------------------
+
+from backend.wardrobe.router import router as wardrobe_router
+
 
 app = FastAPI(title="AI Fashion Stylist API")
+
 logger = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# CORS
+# ---------------------------------------------------------------------------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ---------------------------------------------------------------------------
+# Part 57 - Profile & Product API
+# ---------------------------------------------------------------------------
+
+app.include_router(profile_product_router)
+
+
+# ---------------------------------------------------------------------------
+# Wardrobe API
+# ---------------------------------------------------------------------------
+
+app.include_router(wardrobe_router)
 
 
 # ---------------------------------------------------------------------------
@@ -251,9 +305,14 @@ async def create_style(request: StylingRequest):
             status_code=503,
             detail=str(exc),
         ) from exc
+
     except Exception as exc:
         logger.exception("Styling request failed.")
+
         raise HTTPException(
             status_code=500,
-            detail="Styling request failed. Check the API server logs for details.",
+            detail=(
+                "Styling request failed. "
+                "Check the API server logs for details."
+            ),
         ) from exc

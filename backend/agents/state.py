@@ -19,6 +19,7 @@ class AgentState(TypedDict):
     style_context: dict[str, Any]
     rag_context: list[Any]
     outfit_plan: dict[str, Any]
+    shopping_results: list[Any]
     product_candidates: list[Any]
     selected_products: list[Any]
     fitting_room: dict[str, Any]

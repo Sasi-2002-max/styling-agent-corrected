@@ -1259,6 +1259,35 @@ async def run_orchestrator_async(
     Run the complete fashion workflow asynchronously.
 
     Recommended entry point for FastAPI.
+
+    Part 50: this now executes the LangGraph workflow defined in
+    backend/agents/langgraph_workflow.py. The signature and return
+    value (the final AgentState) are unchanged, so FastAPI and existing
+    callers keep working.
+
+    The import is local on purpose: langgraph_workflow imports the
+    stage helpers from this module, so a top-level import here would be
+    circular.
+    """
+
+    from backend.agents.langgraph_workflow import (
+        run_langgraph_workflow_async,
+    )
+
+    return await run_langgraph_workflow_async(
+        user_profile=user_profile,
+        user_query=user_query,
+    )
+
+
+async def run_orchestrator_legacy_async(
+    user_profile: Optional[Dict[str, Any]],
+    user_query: str,
+) -> AgentState:
+    """
+    Part 49 hand-written loop, kept for reference / rollback / parity tests.
+
+    Not used by the API after Part 50.
     """
 
     state = create_initial_state(
