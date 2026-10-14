@@ -194,8 +194,11 @@ class FakeMCPClient:
         self.calls.append(("get_variants", product_id))
         return []
 
-    async def search_products(self, query="", budget=None, category=None, color=None):
+    
+    async def search_products( self,query="",budget=None,category=None,color=None,occasion=None,style=None,):
         self.calls.append(("search_products", {"category": category, "color": color}))
+    # Keep the existing method body below this point unchanged.
+
         return [
             dict(p)
             for p in CATALOG

@@ -5,10 +5,7 @@ get_product MCP tool.
          v
     get_product()                 <-- this file
          v
-    MockStore.get_product()       (development source; SerpApi/Google
-                                   Shopping will replace this later,
-                                   without changing this tool's name
-                                   or return shape)
+    provider registry -> cached SerpApi result or MockStore product
          v
     Product -> serialized dict (Product.model_dump()), or None
 """
@@ -18,8 +15,11 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 
 from backend.shopping.stores.mock_store import MockStore
+from mcp_server.provider import get_product as get_from_provider
 
+# Backward-compatible injection seam for the existing isolated tool tests.
 _store = MockStore()
+_DEFAULT_STORE = _store
 
 
 def get_product_impl(product_id: str) -> Optional[Dict[str, Any]]:
@@ -30,7 +30,7 @@ def get_product_impl(product_id: str) -> Optional[Dict[str, Any]]:
         The common Product serialized with Product.model_dump(), or None
         if no product with that id exists.
     """
-    product = _store.get_product(product_id)
+    product = _store.get_product(product_id) if _store is not _DEFAULT_STORE else get_from_provider(product_id)
     if product is None:
         return None
     return product.model_dump()

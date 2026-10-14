@@ -5,7 +5,7 @@ check_availability MCP tool.
          v
     check_availability()          <-- this file
          v
-    MockStore.check_availability()
+    provider registry -> cached SerpApi listing or MockStore catalog
          v
     {"product_id": ..., "available": bool}
 """
@@ -15,8 +15,11 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 
 from backend.shopping.stores.mock_store import MockStore
+from mcp_server.provider import check_availability as check_from_provider
 
+# Backward-compatible injection seam for isolated tool tests.
 _store = MockStore()
+_DEFAULT_STORE = _store
 
 
 def check_availability_impl(
@@ -38,10 +41,10 @@ def check_availability_impl(
 
     Availability is read from the store and never guessed.
     """
-    available = _store.check_availability(
-        product_id,
-        size=size,
-    )
+    if _store is not _DEFAULT_STORE:
+        available = _store.check_availability(product_id, size=size)
+    else:
+        available = check_from_provider(product_id, size=size)
 
     return {
         "product_id": product_id,

@@ -1,0 +1,45 @@
+--- a/backend/agents/shopping_agent.py
++++ b/backend/agents/shopping_agent.py
+@@ -57,6 +57,11 @@
+ 
+ SUPPORTED_CATEGORIES = frozenset(_CATEGORY_ALIASES.values())
+ 
++# Product search and fitting-room resolution happen in separate MCP server
++# processes. Keep the full records returned by search in this application
++# process so a later get_product(product_id) can resolve the same selection.
++_SEARCHED_PRODUCT_CACHE: Dict[str, Dict[str, Any]] = {}
++
+ 
+ _GENERIC_CATEGORIES = frozenset(
+     {
+@@ -773,10 +778,15 @@
+             ranking_requirements,
+         )
+ 
+-        return [
++        result_dicts = [
+             _product_to_dict(product)
+             for product in (ranked or [])
+         ]
++        for product_dict in result_dicts:
++            product_id = product_dict.get("product_id")
++            if product_id:
++                _SEARCHED_PRODUCT_CACHE[str(product_id)] = dict(product_dict)
++        return result_dicts
+ 
+     # -------------------------------------------------------------------
+     # Generic search
+@@ -1056,6 +1066,13 @@
+         if not product_id:
+             return None
+ 
++        # Prefer the exact product record returned by this application's
++        # earlier search. MCP starts a fresh subprocess per operation, so its
++        # in-memory SerpApi cache may not contain that product ID.
++        cached_product = _SEARCHED_PRODUCT_CACHE.get(str(product_id))
++        if cached_product is not None:
++            return dict(cached_product)
++
+         async with MCPShoppingClient() as client:
+             result = await client.get_product(
+                 product_id

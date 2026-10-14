@@ -1,0 +1,195 @@
+/* StyleAI existing profile page: compact wizard + refined transparent story panel.
+   Import after Profile.css and Profile.Premium.css. No new page/component. */
+
+.profile .profile-layout {
+  align-items: start;
+  padding-top: 14px;
+  padding-bottom: 18px;
+  gap: clamp(24px, 3.5vw, 54px);
+}
+
+/* Correctly position the story panel within the right column. Fully transparent
+   glass treatment: no filled background, only a delicate classic ivory border. */
+.profile .profile-intro-col {
+  width: 100%;
+  max-width: 400px;
+  justify-self: end;
+  align-self: start;
+  margin-top: 14px;
+  padding: 22px 24px 24px;
+  border: 1px solid rgba(255, 250, 238, 0.88);
+  border-radius: 18px;
+  background: transparent;
+  box-shadow:
+    0 0 0 1px rgba(184, 146, 83, 0.32),
+    0 12px 28px rgba(54, 34, 17, 0.08),
+    inset 0 0 0 1px rgba(255, 250, 238, 0.20);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.profile .hero-brand {
+  color: #6c491e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+  text-shadow: 0 1px 0 rgba(255, 250, 238, 0.65);
+}
+
+.profile .profile-intro-col h1,
+.profile .profile-intro-col h1 *,
+.profile h1 {
+  color: #3a2414;
+  font-size: clamp(2.5rem, 3.3vw, 3.35rem);
+  line-height: 0.98;
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-shadow:
+    0 1px 0 rgba(255, 250, 238, 0.75),
+    0 3px 10px rgba(255, 250, 238, 0.35);
+}
+
+.profile .profile-intro {
+  color: #4b321e;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0;
+  text-shadow: 0 1px 0 rgba(255, 250, 238, 0.7);
+}
+
+/* Desktop wizard: tighter vertical rhythm so more content fits above the fold. */
+@media (min-width: 961px) {
+  .profile .profile-layout {
+    grid-template-columns: minmax(0, 580px) minmax(250px, 1fr);
+  }
+
+  .profile .profile-body {
+    margin-top: 0;
+    min-width: 0;
+  }
+
+  .profile .wizard {
+    border-radius: 20px;
+  }
+
+  .profile .stepper-nav {
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+
+  .profile .stepper-dot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profile .stepper-label {
+    font-size: 0.66rem;
+    line-height: 1.15;
+  }
+
+  .profile .wizard-body {
+    padding: 12px 20px 14px;
+  }
+
+  .profile .step-title {
+    font-size: 1.65rem;
+    line-height: 1.1;
+    margin-top: 4px;
+    margin-bottom: 5px;
+  }
+
+  .profile .step-text {
+    font-size: 0.88rem;
+    line-height: 1.35;
+    margin-bottom: 10px;
+  }
+
+  .profile .field {
+    margin-bottom: 8px;
+  }
+
+  .profile .field label {
+    margin-bottom: 4px;
+    font-size: 0.88rem;
+  }
+
+  .profile .field input[type='text'],
+  .profile .field input[type='number'],
+  .profile .field input[type='email'],
+  .profile .field input[type='password'],
+  .profile .field select,
+  .profile .field textarea {
+    min-height: 32px;
+    height: 34px;
+    padding: 6px 10px;
+    border-radius: 9px;
+  }
+
+  .profile .pill {
+    padding: 6px 11px;
+    min-height: 32px;
+    font-size: 0.84rem;
+  }
+
+  .profile .range-row {
+    gap: 8px;
+  }
+
+  .profile .range-row button,
+  .profile .stepper button {
+    min-width: 32px;
+    min-height: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .profile .wizard-actions {
+    margin-top: 8px;
+    gap: 8px;
+  }
+
+  .profile .wizard-actions .next,
+  .profile .wizard-actions .back,
+  .profile .wizard-actions .btn {
+    min-height: 34px;
+    padding: 7px 14px;
+    font-size: 0.86rem;
+  }
+
+  .profile .wizard-body h3,
+  .profile .wizard-body h4 {
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+}
+
+/* Tablet/mobile keeps the existing stacked layout and a light outlined story area. */
+@media (max-width: 960px) {
+  .profile .profile-layout {
+    padding: 18px 22px 30px;
+  }
+
+  .profile .profile-intro-col {
+    max-width: 100%;
+    margin-top: 0;
+    padding: 18px;
+  }
+
+  .profile .profile-intro-col h1,
+  .profile h1 {
+    font-size: clamp(2.25rem, 7vw, 3.2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile .profile-layout {
+    padding: 14px 12px 24px;
+  }
+
+  .profile .profile-intro-col {
+    padding: 15px;
+    border-radius: 15px;
+  }
+}

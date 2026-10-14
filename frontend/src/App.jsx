@@ -1,121 +1,64 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useEffect, useState } from 'react'
+import Header from './components/header.jsx'
+import Home from './pages/home.jsx'
+import Profile from './pages/Profile.jsx'
+import AIStylist from './pages/AIStylist.jsx'
+import FittingRoom from './pages/FittingRoom.jsx'
+import Wardrobe from './pages/Wardrobe.jsx'
+import Placeholder from './pages/placeholder.jsx'
 import './App.css'
 
+// Tiny hash router (no extra package). Links look like #/ai-stylist?prompt=...&occasion=...
+function readLocation() {
+  const raw = window.location.hash.replace(/^#/, '') || '/'
+  const [path, query = ''] = raw.split('?')
+  return { path: path || '/', params: new URLSearchParams(query) }
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [location, setLocation] = useState(readLocation)
+
+  useEffect(() => {
+    const onChange = () => {
+      setLocation(readLocation())
+      window.scrollTo(0, 0)
+    }
+    window.addEventListener('hashchange', onChange)
+    return () => window.removeEventListener('hashchange', onChange)
+  }, [])
+
+  const { path, params } = location
+
+  // The AI Stylist is a full-screen workspace with its own sidebar.
+  if (path === '/ai-stylist') {
+    return <AIStylist key={params.toString()} params={params} />
+  }
+
+  // The Fitting Room is also a full-screen workspace with the shared sidebar.
+  if (path === '/fitting-room') {
+    return <FittingRoom />
+  }
+
+  // My Wardrobe is a full-screen workspace with the shared sidebar.
+  if (path === '/wardrobe') {
+    return <Wardrobe />
+  }
+
+  // My Profile is a full-page screen with its own header and photo background.
+  if (path === '/profile') {
+    return <Profile />
+  }
+
+  let page
+  if (path === '/' || path === '/recommendations') page = <Home />
+  else page = <Placeholder title="Page not found" params={params} />
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <div className="app">
+      <Header currentPath={path} />
+      <main className={path === '/' ? 'main main-home' : 'main'}>{page}</main>
+      <footer className="footer">© StyleAI</footer>
+    </div>
   )
 }
 

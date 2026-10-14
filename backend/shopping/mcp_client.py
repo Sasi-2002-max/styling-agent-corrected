@@ -288,6 +288,8 @@ class MCPShoppingClient:
         budget: Optional[float] = None,
         category: Optional[str] = None,
         color: Optional[str] = None,
+        occasion: Optional[str] = None,
+        style: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
 
         arguments: Dict[str, Any] = {
@@ -302,6 +304,12 @@ class MCPShoppingClient:
 
         if color is not None:
             arguments["color"] = color
+
+        if occasion is not None:
+            arguments["occasion"] = occasion
+
+        if style is not None:
+            arguments["style"] = style
 
         result = await self.call_tool(
             "search_products",

@@ -1,0 +1,329 @@
+/* StyleAI Profile — premium layout and interaction overrides.
+   Import this file AFTER Profile.css in Profile.jsx. */
+
+.profile {
+  --pf-gold: #ad8742;
+  --pf-gold-dark: #88652d;
+  --pf-ink: #2e2117;
+  --pf-brown: #493321;
+  --pf-muted: #827568;
+  --pf-line: rgba(157, 126, 75, 0.24);
+  --pf-field: rgba(255, 253, 248, 0.94);
+  --pf-card: rgba(255, 252, 246, 0.94);
+}
+
+/* Desktop: form on the LEFT, story/quote on the RIGHT. */
+.profile .profile-layout {
+  grid-template-columns: minmax(0, 620px) minmax(260px, 1fr);
+  gap: clamp(30px, 5vw, 84px);
+  align-items: start;
+  padding: clamp(28px, 3vw, 48px) clamp(24px, 6vw, 112px) 64px;
+}
+
+.profile .profile-body {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 8px;
+  min-width: 0;
+}
+
+.profile .profile-intro-col {
+  grid-column: 2;
+  grid-row: 1;
+  padding-top: clamp(100px, 13vh, 170px);
+  max-width: 470px;
+  justify-self: end;
+}
+
+.profile .hero-brand {
+  margin-bottom: 18px;
+  color: #6e512c;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profile h1 {
+  font-size: clamp(3.4rem, 5.3vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  text-wrap: balance;
+  text-shadow: 0 1px 18px rgba(255, 250, 239, 0.22);
+}
+
+.profile .profile-intro {
+  max-width: 340px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #493729;
+}
+
+/* Elevated, softly translucent atelier card. */
+.profile .wizard {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 26px;
+  background: var(--pf-card);
+  box-shadow:
+    0 28px 70px rgba(54, 36, 19, 0.19),
+    0 4px 14px rgba(54, 36, 19, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.profile .stepper-nav {
+  padding-top: 25px;
+  background: rgba(244, 236, 221, 0.92);
+}
+
+.profile .stepper-dot {
+  width: 40px;
+  height: 40px;
+  font-weight: 600;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.profile .stepper-nav .current .stepper-dot {
+  box-shadow: 0 5px 14px rgba(173, 135, 66, 0.3);
+  transform: translateY(-1px);
+}
+
+.profile .stepper-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.005em;
+}
+
+.profile .step-title {
+  font-size: clamp(2.15rem, 3vw, 2.7rem);
+  letter-spacing: -0.025em;
+}
+
+.profile .step-text {
+  margin-bottom: 25px;
+}
+
+/* Inputs: soft ivory surfaces, elegant focus ring and clear hover states. */
+.profile .field input[type='text'],
+.profile .field input[type='number'],
+.profile .field input[type='email'],
+.profile .field input[type='password'],
+.profile .field select,
+.profile .field textarea {
+  min-height: 48px;
+  padding: 13px 15px;
+  border: 1px solid rgba(157, 126, 75, 0.26);
+  border-radius: 12px;
+  background: rgba(255, 254, 250, 0.96);
+  box-shadow: inset 0 1px 2px rgba(60, 42, 25, 0.025);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.profile .field input:hover,
+.profile .field select:hover,
+.profile .field textarea:hover {
+  border-color: rgba(173, 135, 66, 0.62);
+}
+
+.profile .field input:focus,
+.profile .field select:focus,
+.profile .field textarea:focus {
+  outline: none;
+  border-color: var(--pf-gold);
+  background: #fffefa;
+  box-shadow: 0 0 0 4px rgba(173, 135, 66, 0.13);
+}
+
+/* Selection pills feel like designed controls, with visible selected state. */
+.profile .pill {
+  padding: 11px 20px;
+  border-color: rgba(157, 126, 75, 0.25);
+  background: rgba(255, 254, 250, 0.94);
+  box-shadow: 0 3px 10px rgba(59, 42, 30, 0.045);
+  transition: transform 160ms ease, border-color 160ms ease,
+    background 160ms ease, box-shadow 160ms ease;
+}
+
+.profile .pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(173, 135, 66, 0.72);
+  box-shadow: 0 6px 14px rgba(59, 42, 30, 0.075);
+}
+
+.profile .pill.selected {
+  color: #fffdf8;
+  background: linear-gradient(135deg, #b99859, #967137);
+  border-color: #a88647;
+  box-shadow: 0 5px 14px rgba(150, 113, 55, 0.2);
+}
+
+.profile .stepper button,
+.profile .range-row button {
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.profile .stepper button:hover,
+.profile .range-row button:hover {
+  transform: translateY(-1px);
+  border-color: var(--pf-gold);
+  background: #eee2cc;
+}
+
+.profile .shape-card,
+.profile .swatch,
+.profile .point .circle {
+  transition: border-color 160ms ease, background 160ms ease,
+    box-shadow 160ms ease, transform 160ms ease;
+}
+
+.profile .shape-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(173, 135, 66, 0.7);
+  box-shadow: 0 8px 20px rgba(59, 42, 30, 0.07);
+}
+
+.profile .shape-card.selected {
+  border-color: var(--pf-gold);
+  background: linear-gradient(145deg, #fffaf0, #f5ead4);
+  box-shadow: inset 0 0 0 1px rgba(173, 135, 66, 0.12);
+}
+
+.profile .swatch.selected {
+  background: rgba(250, 242, 225, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(173, 135, 66, 0.14);
+}
+
+/* Primary action: richer gold gradient, clean hover/focus feedback. */
+.profile .wizard-actions .next,
+.profile a.btn-gold {
+  border: 1px solid rgba(126, 91, 35, 0.12);
+  background: linear-gradient(135deg, #b99a5b 0%, #9b773a 100%);
+  color: #fffdf8;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  box-shadow: 0 9px 22px rgba(150, 113, 55, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.profile .wizard-actions .next:hover,
+.profile a.btn-gold:hover {
+  background: linear-gradient(135deg, #a98748 0%, #80602d 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 13px 26px rgba(120, 86, 37, 0.28);
+}
+
+.profile .wizard-actions .next:active,
+.profile a.btn-gold:active {
+  transform: translateY(0);
+}
+
+.profile .wizard-actions .next:focus-visible,
+.profile .btn:focus-visible,
+.profile .pill:focus-within,
+.profile .shape-card:focus-visible,
+.profile .swatch:focus-visible {
+  outline: 3px solid rgba(173, 135, 66, 0.5);
+  outline-offset: 3px;
+}
+
+.profile .btn-outline {
+  border-radius: 999px;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.profile .btn-outline:hover {
+  transform: translateY(-1px);
+}
+
+/* Keep the image clear; a lighter gradient preserves readable text without washing it out. */
+.profile-bg::after {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 244, 232, 0.10) 0%,
+    rgba(250, 244, 232, 0.03) 42%,
+    rgba(250, 244, 232, 0.10) 100%
+  );
+}
+
+/* Tablet and mobile: stack naturally, with the form first. */
+@media (max-width: 960px) {
+  .profile .profile-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    padding: 28px 24px 48px;
+  }
+
+  .profile .profile-body {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0;
+    width: 100%;
+    max-width: 680px;
+    justify-self: center;
+  }
+
+  .profile .profile-intro-col {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    width: 100%;
+    max-width: 680px;
+    padding-top: 4px;
+  }
+
+  .profile h1 {
+    font-size: clamp(2.8rem, 8vw, 4rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile .profile-layout {
+    padding: 20px 14px 36px;
+  }
+
+  .profile .wizard {
+    border-radius: 20px;
+  }
+
+  .profile .wizard-body {
+    padding: 22px 18px 28px;
+  }
+
+  .profile .stepper-nav {
+    padding: 20px 10px 15px;
+  }
+
+  .profile .stepper-dot {
+    width: 34px;
+    height: 34px;
+  }
+
+  .profile .stepper-nav li:not(:last-child)::after {
+    top: 17px;
+    left: calc(50% + 21px);
+    right: calc(-50% + 21px);
+  }
+
+  .profile .stepper-label {
+    font-size: 0.63rem;
+  }
+
+  .profile .wizard-actions {
+    gap: 9px;
+  }
+
+  .profile .wizard-actions .next {
+    padding: 15px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile *,
+  .profile *::before,
+  .profile *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -48,9 +48,12 @@ class InProcessClient:
         budget: Optional[float] = None,
         category: Optional[str] = None,
         color: Optional[str] = None,
+        occasion: Optional[str] = None,
+        style: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         return search_products_impl(
-            query=query, category=category, color=color, budget=budget
+            query=query, category=category, color=color, budget=budget,
+            occasion=occasion, style=style,
         )
 
     async def check_availability(self, product_id: str, size: Optional[str] = None):
@@ -58,7 +61,11 @@ class InProcessClient:
 
 
 def _use_in_process_client(monkeypatch) -> None:
+    from mcp_server.tools import search_products as search_products_tool
+
     monkeypatch.setattr(shopping_agent_module, "MCPShoppingClient", InProcessClient)
+    monkeypatch.setattr(search_products_tool, "_store", MockStore())
+
 
 
 def _flatten(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:

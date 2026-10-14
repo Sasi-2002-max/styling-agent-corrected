@@ -960,6 +960,8 @@ class FakeMCPClient:
         budget=None,
         category=None,
         color=None,
+        occasion=None,
+        style=None,
     ):
         self.calls.append(
             (

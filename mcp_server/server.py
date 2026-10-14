@@ -1,6 +1,6 @@
 """StyleAI MCP server (mcp 2.x).
 
-Development backend: MockStore.
+Development fallback: MockStore; optional provider: SerpApi Google Shopping.
 
 The server exposes exactly five shopping tools:
 
@@ -23,7 +23,7 @@ from typing import Any
 
 from mcp.server.mcpserver import MCPServer
 
-from backend.shopping.stores.mock_store import MockStore
+from mcp_server.provider import get_variants as provider_get_variants, get_alternatives as provider_get_alternatives
 
 from mcp_server.tools import get_product as get_product_tool
 from mcp_server.tools import search_products as search_products_tool
@@ -49,7 +49,7 @@ check_availability_tool.register(mcp)
 # Development store
 # ---------------------------------------------------------------------------
 
-_store = MockStore()
+
 
 
 # ---------------------------------------------------------------------------
@@ -61,8 +61,13 @@ async def _call(
     *args: Any,
     **kwargs: Any,
 ) -> Any:
-    """Call a MockStore method and convert Product objects to plain data."""
-    result = getattr(_store, method)(*args, **kwargs)
+    """Call provider-backed product methods and convert models to plain data."""
+    if method == "get_variants":
+        result = provider_get_variants(*args, **kwargs)
+    elif method == "get_alternatives":
+        result = provider_get_alternatives(*args, **kwargs)
+    else:
+        raise ValueError(f"Unsupported provider method: {method}")
 
     if inspect.isawaitable(result):
         result = await result

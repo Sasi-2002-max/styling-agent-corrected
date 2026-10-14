@@ -600,6 +600,8 @@ class ShoppingAgent:
         category: Optional[str] = None,
         color: Optional[str] = None,
         size: Optional[str] = None,
+        occasion: Optional[str] = None,
+        style: Optional[str] = None,
         outfit_item: Optional[Dict[str, Any]] = None,
         relax_color: bool = False,
     ) -> List[Dict[str, Any]]:
@@ -643,6 +645,8 @@ class ShoppingAgent:
             budget=normalized_budget,
             category=normalized_category,
             color=normalized_color,
+            occasion=occasion,
+            style=style,
         )
 
         requested_color_text = clean_color(
@@ -658,6 +662,8 @@ class ShoppingAgent:
                 budget=normalized_budget,
                 category=normalized_category,
                 color=None,
+                occasion=occasion,
+                style=style,
             )
             same_family = [
                 raw
@@ -952,6 +958,8 @@ class ShoppingAgent:
                         category=params["category"],
                         color=params["color"],
                         size=params["size"],
+                        occasion=plan.occasion,
+                        style=plan.style,
                         outfit_item=entry["item"],
                         relax_color=True,
                     )

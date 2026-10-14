@@ -52,6 +52,13 @@ from backend.api.profile_product_router import (
 
 from backend.wardrobe.router import router as wardrobe_router
 
+from backend.virtual_tryon.service import (
+    VirtualTryOnConfigurationError,
+    VirtualTryOnProviderError,
+    VirtualTryOnRequest,
+    generate_virtual_try_on,
+)
+
 
 app = FastAPI(title="AI Fashion Stylist API")
 
@@ -269,6 +276,21 @@ async def fitting_room_switch_color(
             status_code=422,
             detail=str(exc),
         ) from exc
+
+
+# ---------------------------------------------------------------------------
+# AI Virtual Try-On
+# ---------------------------------------------------------------------------
+
+@app.post("/api/virtual-try-on")
+async def virtual_try_on(request: VirtualTryOnRequest) -> Dict[str, Any]:
+    """Generate one realistic outfit preview; does not call SerpApi."""
+    try:
+        return await generate_virtual_try_on(request)
+    except VirtualTryOnConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except VirtualTryOnProviderError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
 
 # ---------------------------------------------------------------------------

@@ -192,6 +192,8 @@ class FakeMCPShoppingClient:
         budget: Optional[float] = None,
         category: Optional[str] = None,
         color: Optional[str] = None,
+        occasion: Optional[str] = None,
+        style: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         self.search_calls.append(
             {
@@ -260,6 +262,8 @@ class CategoryAwareFakeClient(FakeMCPShoppingClient):
         budget: Optional[float] = None,
         category: Optional[str] = None,
         color: Optional[str] = None,
+        occasion: Optional[str] = None,
+        style: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         self.search_calls.append(
             {

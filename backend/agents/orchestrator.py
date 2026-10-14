@@ -75,6 +75,7 @@ from __future__ import annotations
 import asyncio
 import inspect
 import logging
+import os
 from typing import Any, Dict, List, Optional
 
 from backend.agents.profile_agent import profile_agent
@@ -88,7 +89,12 @@ from backend.agents.state import AgentState
 
 logger = logging.getLogger(__name__)
 
-MAX_REVISIONS = 2
+# One revision by default avoids repeating multiple paid shopping searches.
+# Set STYLE_MAX_REVISIONS=2 to restore the previous maximum (values clamped 0..2).
+try:
+    MAX_REVISIONS = max(0, min(2, int(os.getenv("STYLE_MAX_REVISIONS", "1"))))
+except ValueError:
+    MAX_REVISIONS = 1
 
 
 class OrchestratorError(Exception):

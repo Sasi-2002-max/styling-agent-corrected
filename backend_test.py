@@ -1,10 +1,14 @@
+
 import asyncio
+
+import pytest
 
 from backend.database.connection import get_engine
 from backend.agents.orchestrator import run_orchestrator_async
 
 
-def test_database():
+def check_database():
+    """Check whether the database connection works."""
     engine = get_engine()
 
     if engine is None:
@@ -26,7 +30,13 @@ def test_database():
         return False
 
 
-async def test_style_workflow():
+def test_database():
+    """Pytest wrapper for the database check."""
+    assert check_database(), "Database connection check failed"
+
+
+async def run_style_workflow_check():
+    """Run the asynchronous AI style workflow."""
     print("\n🧪 Testing AI style workflow...")
 
     user_profile = {
@@ -52,17 +62,17 @@ async def test_style_workflow():
 
         print("✅ Orchestrator executed successfully")
 
-        if result:
-            print("✅ Style workflow returned a result")
-            print("\nResult type:", type(result).__name__)
+        if not result:
+            print("❌ Style workflow returned an empty result")
+            return False
 
-            if isinstance(result, dict):
-                print("Result keys:", list(result.keys()))
+        print("✅ Style workflow returned a result")
+        print("\nResult type:", type(result).__name__)
 
-            return True
+        if isinstance(result, dict):
+            print("Result keys:", list(result.keys()))
 
-        print("❌ Style workflow returned an empty result")
-        return False
+        return True
 
     except Exception as e:
         print("❌ Style workflow failed")
@@ -70,13 +80,21 @@ async def test_style_workflow():
         return False
 
 
+@pytest.mark.asyncio
+async def test_style_workflow():
+    """Pytest test for the asynchronous AI style workflow."""
+    assert await run_style_workflow_check(), (
+        "Style workflow did not return a successful result"
+    )
+
+
 async def main():
     print("\n==============================")
     print("   BACKEND INTEGRATION TEST")
     print("==============================\n")
 
-    database_ok = test_database()
-    style_ok = await test_style_workflow()
+    database_ok = check_database()
+    style_ok = await run_style_workflow_check()
 
     print("\n==============================")
 

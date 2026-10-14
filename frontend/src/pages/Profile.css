@@ -1,0 +1,687 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+/* My Profile page - "Quiet Luxury Atelier" (Concept 1).
+   The boutique photo covers the whole page; title sits top-left, the cream card on the right. */
+
+.profile {
+  --pf-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --pf-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pf-gold: #a98847;
+  --pf-gold-dark: #8c6f35;
+  --pf-ink: #2b1f16;
+  --pf-brown: #3b2a1e;
+  --pf-muted: #8a7e72;
+  --pf-line: #e4dac8;
+  --pf-field: #fbf9f4;
+  --pf-card: #faf7f1;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--pf-sans);
+  color: var(--pf-ink);
+  text-align: left;
+  line-height: 1.4;
+  background: #e9e0d0;
+}
+/* Make sure global page styles (centered body, dark background, etc.) can't change this page */
+html:has(.profile),
+body:has(.profile),
+#root:has(.profile) {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color-scheme: light;
+  background: #e9e0d0;
+}
+.profile *,
+.profile *::before,
+.profile *::after { box-sizing: border-box; }
+.profile :where(h1, h2, h3, p, dl, dd, ol) { margin: 0; }
+.profile :where(ol) { padding: 0; }
+.profile :where(a) { color: inherit; text-decoration: none; }
+.profile :where(button, input) { font: inherit; color: inherit; }
+.profile :where(h1, h2, h3, .hero-brand) { font-family: var(--pf-serif); }
+.profile .btn { display: inline-flex; align-items: center; justify-content: center; padding: 13px 28px; border: none; border-radius: 999px; font-family: var(--pf-sans); font-size: 1rem; line-height: 1.2; cursor: pointer; }
+
+/* ---------- Full-page photo (fixed, so it stays put while the card scrolls) ---------- */
+.profile-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #e9e0d0 center / cover no-repeat;
+}
+.profile-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(247, 242, 232, 0.35) 0%, rgba(247, 242, 232, 0) 55%);
+}
+
+/* ---------- Cream header on top of the photo ---------- */
+.profile .pf-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding: 16px clamp(24px, 6vw, 120px);
+  background: #f9f5ec;
+  border-bottom: 1px solid rgba(59, 42, 30, 0.08);
+}
+.profile .pf-logo { font-family: var(--pf-serif); font-size: 2.25rem; font-weight: 500; line-height: 1; color: var(--pf-gold-dark); }
+.profile .pf-logo span { color: var(--pf-gold-dark); }
+.profile .pf-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; font-size: 0.9rem; }
+.profile .pf-nav a:not(.pf-avatar) { padding: 6px 0; color: var(--pf-ink); border-bottom: 2px solid transparent; }
+.profile .pf-nav a:not(.pf-avatar):hover,
+.profile .pf-nav a.active { border-bottom-color: var(--pf-gold); }
+.profile .pf-avatar { display: block; width: 42px; height: 42px; border-radius: 50%; overflow: hidden; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(59, 42, 30, 0.18); }
+.profile .pf-avatar svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- Title on the left, card on the right ---------- */
+.profile-layout {
+  width: 100%;
+  margin: 0;
+  padding: 56px clamp(24px, 6vw, 120px) 48px;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 620px);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+.profile-intro-col { padding-top: 90px; }
+.hero-brand { font-size: 1.5rem; letter-spacing: 0.5px; color: #5a4636; margin-bottom: 14px; }
+.hero-brand span { color: inherit; }
+.profile h1 {
+  font-size: clamp(3rem, 5vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.08;
+  font-weight: 500;
+  color: #3b2616;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.profile-intro {
+  max-width: 300px;
+  font-family: var(--pf-sans);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #3f3025;
+  text-align: left;
+  margin: 0;
+}
+
+.profile-body { position: relative; min-width: 0; margin-top: 110px; }
+
+/* ---------- The cream card ---------- */
+.wizard {
+  overflow: hidden;
+  background: var(--pf-card);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(59, 42, 30, 0.22);
+}
+.wizard-body { padding: 26px clamp(22px, 5vw, 48px) 40px; }
+
+/* Numbered progress band at the top of the card */
+.stepper-nav {
+  display: flex;
+  margin: 0;
+  padding: 30px clamp(14px, 4vw, 40px) 18px;
+  list-style: none;
+  background: #f6f1e7;
+  border-bottom: 1px solid rgba(59, 42, 30, 0.05);
+  font-family: var(--pf-sans);
+}
+.stepper-nav li {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+/* thin line joining one circle to the next */
+.stepper-nav li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 19px;
+  left: calc(50% + 28px);
+  right: calc(-50% + 28px);
+  height: 1px;
+  background: #ddd2bd;
+}
+.stepper-dot {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  color: #8a7a68;
+  background: #fbf8f2;
+  border: 1px solid #ddd2bd;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(59, 42, 30, 0.06);
+}
+.stepper-nav .current .stepper-dot,
+.stepper-nav .done .stepper-dot { color: #fff; background: var(--pf-gold); border-color: var(--pf-gold); }
+.stepper-nav .done .stepper-dot { opacity: 0.75; }
+.stepper-label { font-size: 0.72rem; color: #5a4a3a; text-align: center; line-height: 1.25; }
+.stepper-nav .current .stepper-label { color: var(--pf-ink); font-weight: 600; }
+
+.step-count {
+  font-family: var(--pf-sans);
+  font-size: 0.85rem;
+  color: #8a7e72;
+  text-align: left;
+  margin: 8px 0 6px;
+}
+.step-title {
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: left;
+  color: #1c140d;
+  margin-bottom: 6px;
+}
+.step-text {
+  font-family: var(--pf-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #8a7e72;
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+/* section headings inside a step (e.g. "Style preferences") */
+.profile .subhead {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #1c140d;
+  margin: 30px 0 4px;
+}
+.profile .subhead.first { margin-top: 0; }
+.profile .subtext {
+  font-family: var(--pf-sans);
+  font-size: 0.85rem;
+  color: #8a7e72;
+  margin: 0 0 16px;
+}
+
+/* ---------- Fields ---------- */
+.profile .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 0;
+  border: none;
+}
+
+.profile .field > label,
+.profile .field > legend {
+  font-family: var(--pf-sans);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #2b1f16;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.profile .field input[type='text'],
+.profile .field input[type='number'] {
+  width: 100%;
+  padding: 13px 14px;
+  font-family: var(--pf-sans);
+  font-size: 1rem;
+  color: var(--pf-ink);
+  background: var(--pf-field);
+  border: 1px solid var(--pf-line);
+  border-radius: 8px;
+}
+
+.profile .field input:focus {
+  outline: 2px solid var(--pf-gold);
+  outline-offset: 1px;
+}
+
+.profile [aria-invalid='true'] {
+  border-color: #b3261e;
+}
+
+.profile .hint {
+  font-family: var(--pf-sans);
+  font-size: 0.85rem;
+  color: var(--pf-muted);
+}
+
+.profile .error {
+  font-family: var(--pf-sans);
+  font-size: 0.85rem;
+  color: #b3261e;
+  margin-top: 6px;
+}
+
+/* Hides the real radio / checkbox but keeps it usable with the keyboard */
+.profile .visually-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+/* ---------- Round choice buttons (gender, clothing style) ---------- */
+.profile .pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile .pill-rows { display: flex; flex-direction: column; gap: 12px; }
+
+.profile .pill {
+  position: relative;
+  padding: 12px 26px;
+  font-family: var(--pf-sans);
+  font-size: 0.95rem;
+  background: #fdfbf7;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(59, 42, 30, 0.05);
+  cursor: pointer;
+}
+
+.profile .pill.selected {
+  background: var(--pf-gold);
+  color: #fff;
+  border-color: var(--pf-gold);
+}
+
+.profile .pill:focus-within,
+.profile .shape-card:focus-within,
+.profile .swatch:focus-within {
+  outline: 2px solid var(--pf-gold);
+  outline-offset: 2px;
+}
+
+/* ---------- − [ number ] +  and  − [ slider ] + ---------- */
+.profile .stepper,
+.profile .range-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile .stepper input {
+  flex: 1;
+  text-align: center;
+}
+
+.profile .stepper button,
+.profile .range-row button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--pf-brown);
+  background: #f3ede1;
+  border: 1px solid var(--pf-line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile .stepper button:hover,
+.profile .range-row button:hover {
+  border-color: var(--pf-gold);
+}
+
+.profile .range-field {
+  margin-bottom: 26px;
+}
+
+.profile .range-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.profile .range-head strong {
+  font-family: var(--pf-sans);
+  font-size: 1.1rem;
+}
+
+.profile .range-row input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--pf-gold);
+}
+
+/* ---------- Picture cards (body shape, measurements) ---------- */
+.profile .shape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.profile .shape-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px 12px;
+  text-align: center;
+  color: var(--pf-gold);
+  background: #fff;
+  border: 1px solid var(--pf-line);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.profile .shape-card.selected {
+  color: var(--pf-gold-dark);
+  border-color: var(--pf-gold);
+  background: #fbf6ea;
+}
+
+.profile .silhouette {
+  width: 52px;
+  height: 70px;
+}
+
+.profile .card-name {
+  font-family: var(--pf-sans);
+  font-size: 0.95rem;
+  color: var(--pf-ink);
+}
+
+.profile .card-text {
+  font-family: var(--pf-sans);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--pf-muted);
+}
+
+.profile .check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #fff;
+  background: var(--pf-gold);
+  border-radius: 50%;
+}
+
+.profile .shape-card.selected .check {
+  display: flex;
+}
+
+/* ---------- Skin tone swatches ---------- */
+.profile .skin-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.profile .swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 78px;
+  padding: 8px 4px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.profile .swatch.selected {
+  border-color: var(--pf-gold);
+  background: #fbf5e8;
+}
+
+.profile .dot {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--pf-line);
+}
+
+/* ---------- Budget box with a ₹ sign ---------- */
+.profile .prefix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile .prefix span {
+  font-family: var(--pf-sans);
+  font-size: 1.1rem;
+}
+
+/* ---------- Body measurements ---------- */
+.profile .measure-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.profile .measure-card {
+  padding: 12px 4px 8px;
+}
+
+.profile .measure-card .card-name {
+  font-size: 0.8rem;
+}
+
+.profile .measure-icon {
+  width: 38px;
+  height: 70px;
+}
+
+.profile .measure-icon .body {
+  fill: #f1e9da;
+  stroke: #d3c6ad;
+  stroke-width: 1;
+}
+
+.profile .measure-line {
+  stroke: #b0452f;
+  stroke-width: 1.8;
+  stroke-dasharray: 3 2;
+  stroke-linecap: round;
+}
+
+.profile .measure-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+}
+
+.profile .empty-note {
+  font-family: var(--pf-sans);
+  font-size: 0.9rem;
+  color: var(--pf-muted);
+  text-align: center;
+}
+
+/* ---------- Body details (3-point scales) ---------- */
+.profile .detail-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--pf-line);
+}
+
+.profile .scale-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-family: var(--pf-sans);
+  font-size: 0.8rem;
+  color: var(--pf-muted);
+}
+
+.profile .scale-points {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile .scale-points::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 50%;
+  height: 2px;
+  background: var(--pf-line);
+  transform: translateY(-50%);
+}
+
+.profile .point {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.profile .circle {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 2px solid var(--pf-line);
+  border-radius: 50%;
+}
+
+.profile .point.selected .circle {
+  background: var(--pf-gold);
+  border-color: var(--pf-gold);
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.profile .point:focus-within .circle {
+  outline: 2px solid var(--pf-gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Buttons ---------- */
+.profile .wizard-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.profile .wizard-actions .next {
+  flex: 1;
+  padding: 17px 28px;
+  color: #fff;
+  background: var(--pf-gold);
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(169, 136, 71, 0.3);
+}
+
+.profile .wizard-actions .next:hover {
+  background: var(--pf-gold-dark);
+}
+
+.profile a.btn-gold {
+  color: #fff;
+  background: var(--pf-gold);
+}
+
+.profile .btn-outline {
+  color: var(--pf-ink);
+  background: #fff;
+  border: 1px solid var(--pf-line);
+}
+
+.profile .btn-outline:hover {
+  border-color: var(--pf-gold);
+  background: #fbf6ea;
+}
+
+.profile .back-home {
+  margin-top: 22px;
+  text-align: center;
+}
+
+/* ---------- Summary shown after "Save Profile" ---------- */
+.profile .notice {
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-family: var(--pf-sans);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-radius: 8px;
+}
+
+.profile .notice-info {
+  color: var(--pf-brown);
+  background: #fbf5e8;
+  border: 1px solid var(--pf-line);
+}
+
+.profile .summary {
+  margin: 0;
+  font-family: var(--pf-sans);
+}
+
+.profile .summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pf-line);
+}
+
+.profile .summary dt {
+  color: var(--pf-muted);
+  flex-shrink: 0;
+}
+
+.profile .summary dd {
+  margin: 0;
+  text-align: right;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 860px) {
+  .profile-layout { grid-template-columns: 1fr; padding-top: 32px; }
+  .profile-intro-col { padding-top: 0; }
+  .profile-body { margin-top: 8px; }
+  .profile-bg::after { background: linear-gradient(180deg, rgba(247, 242, 232, 0.4) 0%, rgba(247, 242, 232, 0) 45%); }
+}
+
+@media (max-width: 760px) {
+  .stepper-label { font-size: 0.62rem; }
+  .stepper-nav li:not(:last-child)::after { left: calc(50% + 24px); right: calc(-50% + 24px); }
+}
+
+@media (max-width: 520px) {
+  .profile .shape-grid,
+  .profile .measure-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile .measure-inputs { grid-template-columns: 1fr; }
+  .profile .detail-row { grid-template-columns: 90px 1fr; }
+}
