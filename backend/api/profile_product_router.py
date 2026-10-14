@@ -15,6 +15,7 @@ from backend.models.profile import Profile
 from backend.models.user import User
 from backend.schemas.product import ProductSchema
 from backend.schemas.profile import ProfileSchema
+from backend.api.auth_router import current_user
 
 
 router = APIRouter(
@@ -91,16 +92,16 @@ def _product_to_response(product: Product) -> dict[str, Any]:
 def create_profile(
     payload: ProfileCreateRequest,
     db: Session = Depends(get_db),
+    current: User = Depends(current_user),
 ):
     """
     Create or update the profile belonging to an existing user.
     """
 
-    user = (
-        db.query(User)
-        .filter(User.id == payload.user_id)
-        .first()
-    )
+    # Never trust a user_id supplied by the browser; bind the profile to the authenticated account.
+    if payload.user_id != current.id:
+        raise HTTPException(status_code=403, detail="You can only save your own profile.")
+    user = current
 
     if user is None:
         raise HTTPException(
@@ -173,14 +174,18 @@ def create_profile(
 def get_profile(
     user_id: UUID,
     db: Session = Depends(get_db),
+    current: User = Depends(current_user),
 ):
     """
     Get the fashion profile belonging to a user.
     """
 
+    if user_id != current.id:
+        raise HTTPException(status_code=403, detail="You can only access your own profile.")
+
     profile = (
         db.query(Profile)
-        .filter(Profile.user_id == user_id)
+        .filter(Profile.user_id == current.id)
         .first()
     )
 

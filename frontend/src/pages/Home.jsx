@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Heart, Shirt, Sparkles, UserRound } from 'lucide-react'
+import { logout } from '../lib/auth.js'
 import heroImg from '../assets/styleai-aura-home.jpg'
 import './Home.css'
 
@@ -70,6 +71,16 @@ function Home() {
               {label}
             </a>
           ))}
+          <a
+            href="#/login"
+            onClick={(e) => {
+              e.preventDefault()
+              logout()
+              window.location.hash = '#/login'
+            }}
+          >
+            Log out
+          </a>
         </nav>
       </header>
 

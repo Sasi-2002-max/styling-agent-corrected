@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import profileHero from '../assets/profile-hero.jpg'
+import axios from 'axios'
+import { API_BASE_URL, authHeaders, getStoredUser, logout } from '../lib/auth.js'
 import './Profile.css'
 import './Profile.Premium.css'
 import './Profile.Finish.css'
@@ -182,6 +184,34 @@ function usePageScale() {
 
 // Header used only on this page (logo, links, round profile picture).
 function ProfileHeader({ style }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef(null)
+
+  // Close the menu when clicking elsewhere or pressing Escape.
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false)
+    }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('mousedown', onClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onClick)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [menuOpen])
+
+  function handleLogout() {
+    setMenuOpen(false)
+    logout()
+    window.location.hash = '#/login'
+  }
+
+  const user = getStoredUser()
+
   return (
     <header className="pf-header" style={style}>
       <a className="pf-logo" href="#/">
@@ -193,13 +223,34 @@ function ProfileHeader({ style }) {
           My Profile
         </a>
         <a href="#/ai-stylist">AI Stylist</a>
-        <a className="pf-avatar" href="#/profile" aria-label="My profile">
-          <svg viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="20" fill="#d9c8ad" />
-            <circle cx="20" cy="15" r="7" fill="#7a5a3c" />
-            <path d="M5 36c1.5-8 8-12 15-12s13.500 4 15 12z" fill="#7a5a3c" />
-          </svg>
-        </a>
+        <div className="pf-account" ref={menuRef}>
+          <button
+            type="button"
+            className="pf-avatar"
+            aria-label="Account menu"
+            aria-haspopup="menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="20" r="20" fill="#d9c8ad" />
+              <circle cx="20" cy="15" r="7" fill="#7a5a3c" />
+              <path d="M5 36c1.5-8 8-12 15-12s13.500 4 15 12z" fill="#7a5a3c" />
+            </svg>
+          </button>
+
+          {menuOpen && (
+            <div className="pf-menu" role="menu">
+              {user?.email && <p className="pf-menu-email">{user.email}</p>}
+              <a href="#/profile" role="menuitem" onClick={() => setMenuOpen(false)}>
+                My Profile
+              </a>
+              <button type="button" role="menuitem" onClick={handleLogout}>
+                Log out
+              </button>
+            </div>
+          )}
+        </div>
       </nav>
     </header>
   )
@@ -359,6 +410,25 @@ function Profile() {
   const [errors, setErrors] = useState({})
   const [step, setStep] = useState(0)
   const [done, setDone] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const [saveMessage, setSaveMessage] = useState('')
+
+  useEffect(() => {
+    let active = true
+    async function loadProfile() {
+      const user = getStoredUser()
+      if (!user?.id) return
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/profile/${user.id}`, { headers: authHeaders() })
+        if (!active) return
+        const p = response.data
+        setValues(old => ({ ...old, name: p.name || old.name, age: String(p.age ?? old.age), gender: p.gender || old.gender, bodyShape: p.body_shape || old.bodyShape, skinTone: p.skin_tone || old.skinTone, height: String(p.height_cm ?? old.height), weight: String(p.weight_kg ?? old.weight) }))
+        setDone(true)
+      } catch (e) { if (e?.response?.status !== 404 && active) setSaveError('Could not load your saved profile. Please try refreshing.') }
+    }
+    loadProfile()
+    return () => { active = false }
+  }, [])
 
   const isLastStep = step === STEPS.length - 1
   const measurements = availableMeasurements(values.gender)
@@ -415,8 +485,21 @@ function Profile() {
       return
     }
     setErrors({})
-    setDone(true)
-    // No save API is connected yet, so nothing is stored anywhere.
+    setSaveError('')
+    const user = getStoredUser()
+    if (!user?.id) { setSaveError('Please log in again to save your profile.'); return }
+    axios.post(`${API_BASE_URL}/api/profile`, {
+      user_id: user.id,
+      name: values.name.trim(),
+      age: Number(values.age),
+      gender: values.gender,
+      body_shape: values.bodyShape,
+      skin_tone: values.skinTone,
+      height_cm: Number(values.height),
+      weight_kg: Number(values.weight),
+    }, { headers: { ...authHeaders(), 'Content-Type': 'application/json' } })
+      .then(() => { setSaveMessage('Your profile has been saved to your account.'); setDone(true) })
+      .catch((error) => { setSaveError(error?.response?.data?.detail || 'Could not save your profile. Please try again.') })
   }
 
   function handleSubmit(event) {
@@ -463,10 +546,8 @@ function Profile() {
           <div className="wizard">
             <div className="wizard-body wizard-done">
               <h2 className="step-title">Your profile details</h2>
-              <p className="notice notice-info" role="status">
-                These details are only kept on this page while it is open. Saving to your account is
-                not connected yet, so nothing has been stored permanently.
-              </p>
+              <p className="notice notice-info" role="status">{saveMessage || 'Your saved profile is linked to your account.'}</p>
+              {saveError && <p className="notice notice-error" role="alert">{saveError}</p>}
               <dl className="summary">
                 {rows.map(([label, value]) => (
                   <div key={label} className="summary-row">
@@ -756,6 +837,7 @@ function Profile() {
               </dl>
             )}
 
+            {saveError && <p className="notice notice-error" role="alert">{saveError}</p>}
             <div className="wizard-actions">
               {step > 0 && (
                 <button type="button" className="btn btn-outline" onClick={() => setStep(step - 1)}>

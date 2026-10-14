@@ -180,13 +180,15 @@
 }
 .shell-dark .shell-logo {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
+  align-items: baseline;
   font-size: 2.3rem;
   line-height: 1;
   color: #f6f0e4;
 }
 .shell-dark .shell-logo span { color: var(--gold); }
 .shell-dark .shell-logo small {
+  flex: 0 0 100%;
   margin-top: 10px;
   font-family: system-ui, sans-serif;
   font-size: 0.62rem;

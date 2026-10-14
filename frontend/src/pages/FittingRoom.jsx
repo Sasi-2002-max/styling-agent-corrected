@@ -1,17 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Heart, Lightbulb, ArrowUpRight, Repeat, Bookmark, Check } from 'lucide-react'
+import { Heart, Lightbulb, ArrowUpRight, Bookmark, Check } from 'lucide-react'
 import AppShell from '../components/AppShell.jsx'
 import { FittingRoomProvider, useFittingRoom } from '../fitting-room/FittingRoomProvider'
-import { categoryForSlot, OUTFIT_SLOTS } from '../fitting-room/categoryMap'
-import { isAlternativeForSlot, requestAlternatives } from '../fitting-room/productSwitching'
 import { loadSelectedOutfit } from '../lib/outfitHandoff.js'
 import { productImageFor } from '../lib/productImages.js'
 import { saveSavedLook } from '../lib/savedLooks.js'
 import { ROW_GROUPS, buildFittingRoomResponse, totalPrice } from '../lib/fittingRoomAdapter.js'
+import {
+  addFavoriteProduct, removeFavoriteProduct, readFavoriteProducts, recordShoppingMode,
+} from '../lib/wardrobeSource.js'
 import './FittingRoom.css'
-
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000').replace(/\/$/, '')
-const API_OPTIONS = { baseUrl: API_BASE }
 
 const TABS = [
   { key: 'all', label: 'All pieces' },
@@ -109,12 +107,10 @@ function PieceCard({ label, product, liked, onLike, action }) {
 }
 
 function Room({ response, plan }) {
-  const { state, initFromResponse, selectProduct } = useFittingRoom()
+  const { state, initFromResponse } = useFittingRoom()
   const [ready, setReady] = useState(false)
   const [tab, setTab] = useState('all')
-  const [liked, setLiked] = useState({})
-  const [showAlts, setShowAlts] = useState(false)
-  const [alts, setAlts] = useState({}) // slot -> { status, products }
+  const [liked, setLiked] = useState(() => Object.fromEntries(readFavoriteProducts().map((p) => [p.product_id, true])))
   const [saveNote, setSaveNote] = useState('') // '' | 'saved' | 'error'
 
   const initRef = useRef(initFromResponse)
@@ -143,6 +139,11 @@ function Room({ response, plan }) {
     setSaveNote('')
   }, [signature])
 
+  // Tell the Wardrobe whether this session is showing mock or real (SerpApi) products.
+  useEffect(() => {
+    if (pieces.length) recordShoppingMode(pieces.map((p) => p.product))
+  }, [signature]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const saveLook = () => {
     const products = pieces.map((p) => p.product)
     const total = totalPrice(products)
@@ -157,34 +158,14 @@ function Room({ response, plan }) {
   }
 
   const visible = pieces.filter((p) => tab === 'all' || p.group.key === tab)
-  const toggleLike = (id) => setLiked((l) => ({ ...l, [id]: !l[id] }))
-
-  // Load alternatives for the visible slots when "Find alternatives" is opened.
-  const loadingRef = useRef(new Set())
-  useEffect(() => {
-    if (!showAlts) return
-    visible.forEach(({ slot, product }) => {
-      if (alts[slot] || loadingRef.current.has(slot)) return
-      loadingRef.current.add(slot)
-      setAlts((a) => ({ ...a, [slot]: { status: 'loading', products: [] } }))
-      requestAlternatives({ product_id: product.product_id, category: categoryForSlot(slot) }, API_OPTIONS)
-        .then((r) => setAlts((a) => ({ ...a, [slot]: { status: 'ready', products: r.products || [] } })))
-        .catch(() => setAlts((a) => ({ ...a, [slot]: { status: 'error', products: [] } })))
-    })
-  }, [showAlts, tab, pieces]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  const altCards = []
-  if (showAlts) {
-    for (const { slot, group, product } of visible) {
-      for (const alt of (alts[slot] && alts[slot].products) || []) {
-        if (alt && alt.product_id !== product.product_id) altCards.push({ slot, group, product: alt })
-      }
-    }
-  }
-  const altsLoading = showAlts && visible.some(({ slot }) => !alts[slot] || alts[slot].status === 'loading')
-
-  const pick = ({ slot, product }) => {
-    if (isAlternativeForSlot(slot, product)) selectProduct(product)
+  // Hearting a real product saves it to My Wardrobe; un-hearting removes it. Demo products stay local.
+  const toggleLike = (product) => {
+    const id = product.product_id
+    const next = !liked[id]
+    setLiked((l) => ({ ...l, [id]: next }))
+    if (isDemo(product)) return
+    if (next) addFavoriteProduct(product)
+    else removeFavoriteProduct(id)
   }
 
   if (!ready) return <div className="fr-loading" role="status">Loading your outfit…</div>
@@ -227,14 +208,6 @@ function Room({ response, plan }) {
           {saveNote === 'saved' ? <Check size={18} /> : <Bookmark size={18} />}
           {saveNote === 'saved' ? 'Look saved' : 'Save look'}
         </button>
-        <button
-          type="button"
-          className={'fr-alt-btn' + (showAlts ? ' fr-alt-btn-on' : '')}
-          aria-pressed={showAlts}
-          onClick={() => setShowAlts((v) => !v)}
-        >
-          <Repeat size={18} /> Find alternatives
-        </button>
         </div>
       </div>
 
@@ -256,30 +229,11 @@ function Room({ response, plan }) {
             label={group.label === 'Footwear' ? 'Shoes' : group.label}
             product={product}
             liked={!!liked[product.product_id]}
-            onLike={() => toggleLike(product.product_id)}
+            onLike={() => toggleLike(product)}
           />
         ))}
       </div>
 
-      {showAlts && (
-        <section className="fr-alts" aria-label="Alternatives">
-          <h2>Alternatives</h2>
-          {altsLoading && altCards.length === 0 && <p className="fr-note">Finding alternatives…</p>}
-          {!altsLoading && altCards.length === 0 && <p className="fr-note">No alternatives found.</p>}
-          <div className="fr-grid">
-            {altCards.map((entry) => (
-              <PieceCard
-                key={entry.product.product_id}
-                label={entry.group.label === 'Footwear' ? 'Shoes' : entry.group.label}
-                product={entry.product}
-                liked={!!liked[entry.product.product_id]}
-                onLike={() => toggleLike(entry.product.product_id)}
-                action={{ label: 'Use in outfit', onClick: () => pick(entry) }}
-              />
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   )
 }

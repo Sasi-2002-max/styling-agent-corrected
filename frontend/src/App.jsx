@@ -1,62 +1,118 @@
 import { useEffect, useState } from 'react'
 import Header from './components/header.jsx'
-import Home from './pages/home.jsx'
+import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import AIStylist from './pages/AIStylist.jsx'
 import FittingRoom from './pages/FittingRoom.jsx'
 import Wardrobe from './pages/Wardrobe.jsx'
 import Placeholder from './pages/placeholder.jsx'
+import Auth from './pages/Auth.jsx'
+import { token } from './lib/auth.js'
 import './App.css'
 
-// Tiny hash router (no extra package). Links look like #/ai-stylist?prompt=...&occasion=...
+// If someone opens /signup or /login (no #), convert it to the
+// hash route (/#/signup) that this app actually uses.
+function normalizeUrl() {
+  const { pathname, hash } = window.location
+
+  if (pathname !== '/' && !hash) {
+    window.history.replaceState(null, '', '/#' + pathname)
+  }
+}
+
 function readLocation() {
+  normalizeUrl()
+
   const raw = window.location.hash.replace(/^#/, '') || '/'
   const [path, query = ''] = raw.split('?')
-  return { path: path || '/', params: new URLSearchParams(query) }
+
+  return {
+    path: path || '/',
+    params: new URLSearchParams(query),
+  }
 }
 
 function App() {
   const [location, setLocation] = useState(readLocation)
+  const [authenticated, setAuthenticated] = useState(() =>
+    Boolean(token())
+  )
 
   useEffect(() => {
     const onChange = () => {
       setLocation(readLocation())
+      setAuthenticated(Boolean(token()))
       window.scrollTo(0, 0)
     }
+
     window.addEventListener('hashchange', onChange)
-    return () => window.removeEventListener('hashchange', onChange)
+
+    return () => {
+      window.removeEventListener('hashchange', onChange)
+    }
   }, [])
 
   const { path, params } = location
 
-  // The AI Stylist is a full-screen workspace with its own sidebar.
+  function handleAuthenticated() {
+    setAuthenticated(Boolean(token()))
+    window.location.hash = '#/'
+  }
+
+  // Login and signup routes are checked before the
+  // authentication guard so users can always reach these pages.
+  if (path === '/login' || path === '/signup') {
+    return (
+      <Auth
+        key={path}
+        initialMode={path === '/signup' ? 'signup' : 'login'}
+        onAuthenticated={handleAuthenticated}
+      />
+    )
+  }
+
+  // Protect the application pages.
+  if (!authenticated || !token()) {
+    return (
+      <Auth
+        initialMode="signup"
+        onAuthenticated={handleAuthenticated}
+      />
+    )
+  }
+
   if (path === '/ai-stylist') {
     return <AIStylist key={params.toString()} params={params} />
   }
 
-  // The Fitting Room is also a full-screen workspace with the shared sidebar.
   if (path === '/fitting-room') {
     return <FittingRoom />
   }
 
-  // My Wardrobe is a full-screen workspace with the shared sidebar.
   if (path === '/wardrobe') {
     return <Wardrobe />
   }
 
-  // My Profile is a full-page screen with its own header and photo background.
   if (path === '/profile') {
     return <Profile />
   }
 
   let page
-  if (path === '/' || path === '/recommendations') page = <Home />
-  else page = <Placeholder title="Page not found" params={params} />
+
+  if (path === '/') {
+    page = <Home />
+  } else {
+    page = <Placeholder title="Page not found" params={params} />
+  }
 
   return (
     <div className="app">
       <Header currentPath={path} />
-      <main className={path === '/' ? 'main main-home' : 'main'}>{page}</main>
+
+      <main className={path === '/' ? 'main main-home' : 'main'}>
+        {page}
+      </main>
+
       <footer className="footer">© StyleAI</footer>
     </div>
   )

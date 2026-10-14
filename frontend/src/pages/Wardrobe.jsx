@@ -1,12 +1,16 @@
 import { useMemo, useRef, useState, useEffect } from 'react'
 import {
   UserRound, Plus, Shirt, Heart, Search, ChevronDown, ChevronRight,
-  LayoutGrid, List, Ellipsis, ArrowRight, Camera, Sparkles, X,
+  LayoutGrid, List, Ellipsis, ArrowRight, Camera, Sparkles, X, Trash2,
 } from 'lucide-react'
 import AppShell from '../components/AppShell.jsx'
 import { productImageFor } from '../lib/productImages.js'
 import { swatchHex } from '../lib/fittingRoomAdapter.js'
-import { readSavedLooks, SAVED_LOOKS_UPDATED_EVENT } from '../lib/savedLooks.js'
+import { readSavedLooks, deleteSavedLook, SAVED_LOOKS_UPDATED_EVENT } from '../lib/savedLooks.js'
+import {
+  resolveShoppingMode, FAVORITES_UPDATED_EVENT, readFavoriteProducts, removeFavoriteProduct,
+  favoriteToItem, retailerUrl, retailerName, isRealLook,
+} from '../lib/wardrobeSource.js'
 import heroImg from '../assets/styleai-hero.jpg'
 import {
   GROUPS, WARDROBE_ITEMS, STYLE_SUGGESTIONS, STYLE_MATCHES, singular,
@@ -20,29 +24,16 @@ const SORTS = {
   nameDesc: { label: 'Name Z–A', fn: (a, b) => b.name.localeCompare(a.name) },
 }
 const dateValue = (item) => Number.isFinite(new Date(item.addedAt).getTime()) ? new Date(item.addedAt).getTime() : 0
-const STORAGE_KEY = 'styleai-wardrobe-items-v1'
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024
 const byId = Object.fromEntries(WARDROBE_ITEMS.map((i) => [i.id, i]))
 const imageOf = (item) => item.imageData || productImageFor({ category: item.shape, color: item.color })
 const dotColor = (item) => swatchHex(item.color) || '#cfc2a8'
 
 function Thumb({ item }) {
+  const [failed, setFailed] = useState(false)
   if (!item) return null
-  return <img src={imageOf(item)} alt={item.name} loading="lazy" />
-}
-
-function retailerUrl(value) {
-  if (typeof value !== 'string' || !value.trim()) return ''
-  try {
-    const url = new URL(value.trim())
-    return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : ''
-  } catch {
-    return ''
-  }
-}
-
-function retailerName(value) {
-  return typeof value === 'string' ? value.replace(/^SerpApi\s*\/\s*/i, '').trim() : 'retailer'
+  const fallback = productImageFor({ category: item.shape, color: item.color })
+  return <img src={failed ? fallback : imageOf(item)} alt={item.name} loading="lazy" onError={() => setFailed(true)} />
 }
 
 function lookDate(look) {
@@ -99,15 +90,27 @@ function Modal({ title, onClose, children }) {
 }
 
 export default function Wardrobe() {
-  const [items, setItems] = useState(() => {
+  // Decided once when the page opens: 'mock' (demo stickers) or 'real' (SerpApi retailers).
+  const [mock] = useState(() => resolveShoppingMode() === 'mock')
+  return <WardrobePage mock={mock} />
+}
+
+function WardrobePage({ mock }) {
+  const STORAGE_KEY = mock ? 'styleai-wardrobe-items-v1' : 'styleai-wardrobe-items-real-v1'
+  const initialItems = mock ? WARDROBE_ITEMS : []
+  // ownItems = items added by hand (mock: the demo "stickers"; real: starts empty).
+  const [ownItems, setItems] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-      if (!saved) return WARDROBE_ITEMS
+      if (!saved) return initialItems
       const parsed = JSON.parse(saved)
-      return Array.isArray(parsed) ? parsed : WARDROBE_ITEMS
-    } catch { return WARDROBE_ITEMS }
+      return Array.isArray(parsed) ? parsed : initialItems
+    } catch { return initialItems }
   })
-  const [savedLooks, setSavedLooks] = useState(() => readSavedLooks())
+  // Real mode only: products hearted from real retailers.
+  const [favorites, setFavorites] = useState(() => (mock ? [] : readFavoriteProducts()))
+  const [allLooks, setAllLooks] = useState(() => readSavedLooks())
+
   const [group, setGroup] = useState('All')
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState('newest')
@@ -127,13 +130,24 @@ export default function Wardrobe() {
   }, [])
 
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)) } catch {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(ownItems)) } catch {
       // Large images may exceed browser storage. The current session remains usable.
     }
-  }, [items])
+  }, [ownItems])
 
   useEffect(() => {
-    const refreshSavedLooks = () => setSavedLooks(readSavedLooks())
+    if (mock) return undefined
+    const refresh = () => setFavorites(readFavoriteProducts())
+    window.addEventListener(FAVORITES_UPDATED_EVENT, refresh)
+    window.addEventListener('storage', refresh)
+    return () => {
+      window.removeEventListener(FAVORITES_UPDATED_EVENT, refresh)
+      window.removeEventListener('storage', refresh)
+    }
+  }, [])
+
+  useEffect(() => {
+    const refreshSavedLooks = () => setAllLooks(readSavedLooks())
     window.addEventListener(SAVED_LOOKS_UPDATED_EVENT, refreshSavedLooks)
     window.addEventListener('storage', refreshSavedLooks)
     return () => {
@@ -144,13 +158,36 @@ export default function Wardrobe() {
 
   useEffect(() => {
     const remove = (event) => {
-      if (window.confirm('Remove this item from your local prototype wardrobe?')) {
+      if (window.confirm('Remove this item from your wardrobe?')) {
         setItems((list) => list.filter((item) => item.id !== event.detail))
+        if (!mock) removeFavoriteProduct(event.detail)
       }
     }
     window.addEventListener('styleai-remove-item', remove)
     return () => window.removeEventListener('styleai-remove-item', remove)
   }, [])
+
+  // Mock store -> only demo items. Real retailers -> hearted real products + items you added yourself.
+  const items = useMemo(
+    () => (mock ? ownItems : [...favorites.map(favoriteToItem), ...ownItems]),
+    [ownItems, favorites],
+  )
+
+  // Looks are split by source so mock looks never appear in real mode (and vice versa).
+  const savedLooks = useMemo(
+    () => allLooks
+      .filter((look) => Array.isArray(look?.products))
+      .filter((look) => isRealLook(look) === !mock),
+    [allLooks, mock],
+  )
+
+  const unsaveLook = (look) => {
+    if (!window.confirm(`Remove "${look.name}" from your saved looks?`)) return
+    deleteSavedLook(look.id) // really removes it from storage and fires the refresh event
+    setAllLooks(readSavedLooks())
+    setSelectedLook(null)
+    setModal((m) => (m === 'look-details' ? null : m))
+  }
 
   const counts = useMemo(() => {
     const c = { All: items.length }
@@ -166,7 +203,13 @@ export default function Wardrobe() {
       .sort(SORTS[sort].fn)
   }, [items, group, query, sort])
 
-  const toggleFavorite = (id) => setItems((list) => list.map((i) => i.id === id ? { ...i, favorite: !i.favorite } : i))
+  const toggleFavorite = (id) => {
+    if (!mock && favorites.some((p) => String(p.product_id ?? p.id ?? p.product_url) === String(id))) {
+      removeFavoriteProduct(id) // un-hearting a real product removes it from the wardrobe
+      return
+    }
+    setItems((list) => list.map((i) => i.id === id ? { ...i, favorite: !i.favorite } : i))
+  }
   const openAdd = (withPicker = false) => {
     setForm({ name: '', group: '', color: '', brand: '', notes: '' })
     setFormError('')
@@ -223,7 +266,7 @@ export default function Wardrobe() {
     { value: savedLooks.length, label: 'Saved Looks' },
     { value: favoriteCount, label: 'Favorites' },
     { value: GROUPS.filter((g) => counts[g] > 0).length, label: 'Categories' },
-    { value: STYLE_MATCHES, label: 'Style Matches' },
+    ...(mock ? [{ value: STYLE_MATCHES, label: 'Style Matches' }] : []),
   ]
   const quickActions = [
     { icon: Plus, label: 'Add New Item', onClick: () => openAdd(false) },
@@ -278,25 +321,26 @@ export default function Wardrobe() {
                 </div>
               </div>
               {visible.length ? <div className={view === 'grid' ? 'wd-grid' : 'wd-grid wd-list'}>{visible.map((item) => <ItemCard key={item.id} item={item} onToggleFavorite={toggleFavorite} />)}</div> :
-                <div className="wd-empty"><Search size={25} /><p>No items match your search or category.</p><span>Try another search or clear your filters.</span>{(query || group !== 'All') && <button type="button" className="wd-secondary-btn" onClick={() => { setQuery(''); setGroup('All') }}>Clear filters</button>}</div>}
+                <div className="wd-empty"><Search size={25} />{items.length === 0 && !mock ? <><p>Your wardrobe is empty.</p><span>Tap the heart on products from real retailers to save them here.</span></> : <><p>No items match your search or category.</p><span>Try another search or clear your filters.</span></>}{(query || group !== 'All') && <button type="button" className="wd-secondary-btn" onClick={() => { setQuery(''); setGroup('All') }}>Clear filters</button>}</div>}
             </section>
-            <section className="wd-suggest">
+            {mock && <section className="wd-suggest">
               <div className="wd-suggest-head"><div><h2>Style Suggestions for Your Wardrobe</h2><p>Outfit ideas using items you already own.</p></div><a className="wd-link" href="#/ai-stylist">View More <ArrowRight size={16} /></a></div>
               <div className="wd-suggest-grid">{STYLE_SUGGESTIONS.map((s) => <button type="button" className="wd-outfit" key={s.id} onClick={() => { setSelectedLook({ ...s, date: 'Demo suggestion', demo: true }); setModal('suggestion') }}><div className="wd-outfit-imgs">{s.itemIds.map((id) => <Thumb key={id} item={items.find((i) => i.id === id) || byId[id]} />)}</div><span>{s.name}</span></button>)}</div>
-            </section>
+            </section>}
           </div>
           <aside className="wd-side">
             <section className="wd-panel"><div className="wd-side-head"><h2>Saved Looks</h2><button type="button" className="wd-link wd-text-button" onClick={() => setModal('all-looks')}>View All <ArrowRight size={16} /></button></div>
               <ul className="wd-looks">
                 {savedLooks.length ? savedLooks.slice(0, 3).map((look) => (
-                  <li key={look.id}>
+                  <li key={look.id} className="wd-look-row">
                     <button type="button" className="wd-look-button" onClick={() => { setSelectedLook(look); setModal('look-details') }}>
                       <div className="wd-look-imgs">{look.products.slice(0, 2).map((product, index) => <Thumb key={product.product_id || index} item={{ name: product.title || 'Saved product', color: product.color || '', shape: product.category || 'tops', imageData: retailerUrl(product.image_url) }} />)}</div>
                       <div className="wd-look-text"><strong>{look.name}</strong><span>{look.products.length} item{look.products.length === 1 ? '' : 's'}, {lookDate(look)}</span></div>
                       <ChevronRight size={18} />
                     </button>
+                    <button type="button" className="wd-look-remove" aria-label={`Unsave ${look.name}`} title="Unsave look" onClick={() => unsaveLook(look)}><Trash2 size={16} /></button>
                   </li>
-                )) : <li className="wd-saved-empty">Saved outfits will appear here. Use “Save Look” in the fitting room to keep one on this device.</li>}
+                )) : <li className="wd-saved-empty">Saved outfits will appear here. Use “Save Look” in the fitting room to keep one.</li>}
               </ul>
             </section>
             <section className="wd-panel"><h2 className="wd-side-title">Quick Actions</h2><div className="wd-actions">{quickActions.map(({ icon: Icon, label, href, onClick }) => { const inner = <><Icon size={20} strokeWidth={1.6} /><span>{label}</span><ChevronRight size={17} /></>; return href ? <a key={label} className="wd-action" href={href}>{inner}</a> : <button key={label} type="button" className="wd-action" onClick={onClick}>{inner}</button> })}</div></section>
@@ -331,10 +375,10 @@ export default function Wardrobe() {
             </div>
           ))}</div>
           {selectedLook.totalPrice !== undefined && selectedLook.totalPrice !== null && Number.isFinite(Number(selectedLook.totalPrice)) && <p className="wd-prototype-note">Outfit total: {selectedLook.currency === 'INR' ? '₹' : `${selectedLook.currency || ''} `}{Number(selectedLook.totalPrice).toLocaleString('en-IN')}</p>}
-          <div className="wd-form-actions"><button type="button" className="wd-secondary-btn" onClick={() => setModal(null)}>Close</button>{selectedLook.demo && <a className="wd-primary-btn" href="#/ai-stylist">Open AI Stylist</a>}</div>
+          <div className="wd-form-actions"><button type="button" className="wd-secondary-btn" onClick={() => setModal(null)}>Close</button>{selectedLook.demo ? <a className="wd-primary-btn" href="#/ai-stylist">Open AI Stylist</a> : <button type="button" className="wd-secondary-btn wd-unsave-btn" onClick={() => unsaveLook(selectedLook)}><Trash2 size={16} /> Unsave look</button>}</div>
         </div>
       </Modal>}
-      {modal === 'all-looks' && <Modal title="Saved Looks" onClose={() => setModal(null)}><div className="wd-detail-content">{savedLooks.length ? savedLooks.map((look) => <button type="button" className="wd-all-look" key={look.id} onClick={() => { setSelectedLook(look); setModal('look-details') }}><span>{look.name}</span><small>{look.products.length} item{look.products.length === 1 ? '' : 's'}, {lookDate(look)}</small><ChevronRight size={17} /></button>) : <p className="wd-prototype-note">No saved outfits yet. Save a look from the fitting room and it will appear here.</p>}</div></Modal>}
+      {modal === 'all-looks' && <Modal title="Saved Looks" onClose={() => setModal(null)}><div className="wd-detail-content">{savedLooks.length ? savedLooks.map((look) => <div className="wd-all-look-row" key={look.id}><button type="button" className="wd-all-look" onClick={() => { setSelectedLook(look); setModal('look-details') }}><span>{look.name}</span><small>{look.products.length} item{look.products.length === 1 ? '' : 's'}, {lookDate(look)}</small><ChevronRight size={17} /></button><button type="button" className="wd-look-remove" aria-label={`Unsave ${look.name}`} title="Unsave look" onClick={() => unsaveLook(look)}><Trash2 size={16} /></button></div>) : <p className="wd-prototype-note">No saved outfits yet. Save a look from the fitting room and it will appear here.</p>}</div></Modal>}
       {modal === 'create-look' && <Modal title="Create a New Look" onClose={() => setModal(null)}><div className="wd-detail-content"><p>To create and save an outfit, use the existing AI Stylist workflow to generate a look and continue to the Fitting Room. This Wardrobe page does not currently have a supported standalone look-creation form.</p><div className="wd-form-actions"><button type="button" className="wd-secondary-btn" onClick={() => setModal(null)}>Cancel</button><a className="wd-primary-btn" href="#/ai-stylist">Open AI Stylist</a></div></div></Modal>}
     </AppShell>
   )

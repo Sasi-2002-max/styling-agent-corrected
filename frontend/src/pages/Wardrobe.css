@@ -1449,3 +1449,17 @@ body.wd-dark aside:not(.wd-side) nav a[aria-current]:hover {
   font-weight: 600;
   box-shadow: 0 8px 24px -8px rgba(212, 168, 90, 0.55);
 }
+
+/* ---- Unsave look ---- */
+.wd-look-row { position: relative; }
+.wd-look-remove {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid transparent;
+  background: transparent; color: inherit; opacity: .6; cursor: pointer; flex: none;
+}
+.wd-look-row .wd-look-remove { position: absolute; top: 8px; right: 34px; }
+.wd-look-remove:hover { opacity: 1; color: #e0735f; border-color: currentColor; }
+.wd-all-look-row { display: flex; align-items: center; gap: 8px; }
+.wd-all-look-row .wd-all-look { flex: 1; }
+.wd-unsave-btn { display: inline-flex; align-items: center; gap: 6px; }
+.wd-unsave-btn:hover { color: #e0735f; border-color: #e0735f; }

@@ -193,3 +193,71 @@
     border-radius: 15px;
   }
 }
+
+
+/* ---- Quote box sits low on the page, over the sofa area (desktop) ---- */
+@media (min-width: 961px) {
+  .profile .profile-layout {
+    min-height: calc(100vh - 100px);
+  }
+
+  .profile .profile-intro-col {
+    align-self: end;
+    position: sticky;
+    bottom: 28px;
+    margin-top: 0;
+  }
+}
+
+/* ---- Profile picture menu (Log out) ---- */
+.profile .pf-account {
+  position: relative;
+}
+
+.profile button.pf-avatar {
+  padding: 0;
+  cursor: pointer;
+  background: none;
+}
+
+.profile .pf-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  min-width: 190px;
+  padding: 8px;
+  border: 1px solid var(--pf-line, #e4dac8);
+  border-radius: 14px;
+  background: #fffcf6;
+  box-shadow: 0 14px 32px rgba(59, 42, 30, 0.18);
+}
+
+.profile .pf-menu-email {
+  margin: 0;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--pf-line, #e4dac8);
+  color: var(--pf-muted, #8a7e72);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.profile .pf-menu a,
+.profile .pf-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--pf-ink, #2b1f16);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile .pf-menu a:hover,
+.profile .pf-menu button:hover {
+  background: #f3eadb;
+}

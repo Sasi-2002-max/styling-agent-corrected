@@ -1,8 +1,8 @@
+import { logout } from '../lib/auth.js'
 const LINKS = [
   { label: 'Home', path: '/' },
   { label: 'My Profile', path: '/profile' },
   { label: 'AI Stylist', path: '/ai-stylist' },
-  { label: 'Recommendations', path: '/recommendations' },
   { label: 'Fitting Room', path: '/fitting-room' },
   { label: 'My Wardrobe', path: '/wardrobe' },
 ]
@@ -23,6 +23,7 @@ function Header({ currentPath }) {
             {link.label}
           </a>
         ))}
+        <button type="button" className="nav-logout" onClick={() => { logout(); window.location.hash = '#/login'; window.location.reload() }}>Log out</button>
       </nav>
     </header>
   )

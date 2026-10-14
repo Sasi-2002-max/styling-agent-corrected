@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { House, UserRound, Sparkles, Shirt, LayoutGrid, Menu, X } from 'lucide-react'
 import './AppShell.css'
 
-// Same six pages and hash paths as the Home page header.
+// Same five pages and hash paths as the Home page header.
 const NAV_ITEMS = [
   { label: 'Home', icon: House, path: '/' },
   { label: 'My Profile', icon: UserRound, path: '/profile' },
