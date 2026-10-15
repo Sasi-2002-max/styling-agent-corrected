@@ -72,7 +72,7 @@ logger = logging.getLogger(__name__)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origin.strip() for origin in __import__("os").getenv("FRONTEND_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if origin.strip()],
+    allow_origins=[origin.strip() for origin in __import__("os").getenv("FRONTEND_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,https://style-agent.onrender.com").split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
